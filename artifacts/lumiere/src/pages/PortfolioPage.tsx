@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
+import { Fade } from '@/components/Fade';
 import { Link } from 'wouter';
 
 const CATEGORIES = ['All', 'Wedding', 'Corporate', 'Private'];
@@ -29,7 +30,7 @@ export default function PortfolioPage() {
       <div style={{ paddingTop: 80 }}>
 
         {/* PAGE HEADER */}
-        <section style={{ padding: '50px 40px 40px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+        <Fade as="section" direction="in" style={{ padding: '50px 40px 40px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
             <div>
               <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 14 }}>
@@ -43,7 +44,7 @@ export default function PortfolioPage() {
               A curated collection of our finest events — each one a testament to meticulous craft and creative vision.
             </p>
           </div>
-        </section>
+        </Fade>
 
         {/* FILTER TABS */}
         <section style={{ display: 'flex', alignItems: 'center', padding: '0 40px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
@@ -75,8 +76,8 @@ export default function PortfolioPage() {
         {/* GRID — 3 columns, text labels below (no overlay) */}
         <section style={{ padding: '3px 40px 100px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
-            {filtered.map(item => (
-              <div key={item.id}>
+            {filtered.map((item, i) => (
+              <Fade key={item.id} delay={(i % 3) * 0.1}>
                 <div style={{ overflow: 'hidden' }}>
                   <img
                     src={item.img}
@@ -100,13 +101,13 @@ export default function PortfolioPage() {
                     {item.year}
                   </div>
                 </div>
-              </div>
+              </Fade>
             ))}
           </div>
         </section>
 
         {/* CTA */}
-        <section style={{
+        <Fade as="section" style={{
           borderTop: '1px solid rgba(0,0,0,0.08)',
           padding: '60px 40px',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 32,
@@ -127,7 +128,7 @@ export default function PortfolioPage() {
           }}>
             Request a Proposal →
           </Link>
-        </section>
+        </Fade>
 
         <Footer />
       </div>

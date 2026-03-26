@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Link } from 'wouter';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
+import { Fade } from '@/components/Fade';
 
 /* ─── DATA ──────────────────────────────────────────────────────── */
 
@@ -78,16 +79,17 @@ export default function HomePage() {
 
         {/* Bottom-left: headline + CTA */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 40px 44px', maxWidth: 640 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: 18, marginTop: 0 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: 18, marginTop: 0, animation: 'lm-fade-in 0.8s ease 0.2s both' }}>
             Event Design & Production
           </p>
           <h1 style={{
             fontSize: 'clamp(44px, 5.5vw, 72px)', fontWeight: 200, lineHeight: 1.06,
             letterSpacing: '-0.01em', color: '#fff', margin: '0 0 32px',
+            animation: 'lm-fade-up 1s ease 0.35s both',
           }}>
             Where Moments<br />Become <em style={{ fontStyle: 'italic', fontWeight: 300 }}>Extraordinary</em>
           </h1>
-          <div style={{ display: 'flex', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 12, animation: 'lm-fade-up 0.7s ease 0.65s both' }}>
             <button onClick={scrollToContact} style={{
               background: '#fff', color: 'hsl(35 10% 14%)',
               border: 'none', padding: '13px 28px',
@@ -111,7 +113,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom-right: two equal-size clickable project thumbnails */}
-        <div style={{ position: 'absolute', bottom: 0, right: 0, display: 'flex', gap: 2 }}>
+        <div style={{ position: 'absolute', bottom: 0, right: 0, display: 'flex', gap: 2, animation: 'lm-fade-in 1s ease 0.85s both' }}>
           {[
             { title: 'The Tuscany Wedding', cat: 'Wedding', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=85' },
             { title: 'Azure Summit', cat: 'Corporate', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&q=85' },
@@ -150,7 +152,7 @@ export default function HomePage() {
       </section>
 
       {/* Hero caption row */}
-      <div style={{
+      <Fade style={{
         display: 'grid', gridTemplateColumns: '1fr 1fr',
         padding: '32px 40px 48px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60,
       }}>
@@ -172,21 +174,21 @@ export default function HomePage() {
             Explore More <span style={{ fontSize: 14 }}>→</span>
           </button>
         </div>
-      </div>
+      </Fade>
 
       {/* ══ 2. INTRODUCING EVENTS — 3-COL PORTRAIT GRID ═══════════ */}
       <section style={{ padding: '70px 40px 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36 }}>
+        <Fade style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36 }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             Introducing Events
           </h2>
           <Link href="/portfolio" style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)', textDecoration: 'none' }}>
             All Events →
           </Link>
-        </div>
+        </Fade>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 3 }}>
-          {INTRO_EVENTS.map(e => (
-            <div key={e.id}>
+          {INTRO_EVENTS.map((e, i) => (
+            <Fade key={e.id} delay={i * 0.12}>
               <div style={{ overflow: 'hidden' }}>
                 <img
                   src={e.img}
@@ -203,13 +205,13 @@ export default function HomePage() {
                 <div style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 5 }}>{e.title}</div>
                 <div style={{ fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)' }}>{e.location}</div>
               </div>
-            </div>
+            </Fade>
           ))}
         </div>
       </section>
 
       {/* ══ 3. EDITORIAL WIDE IMAGE — FEATURE EVENT ════════════════ */}
-      <section style={{ marginTop: 3 }}>
+      <Fade as="section" direction="in" style={{ marginTop: 3 }}>
         <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
           <img
             src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1800&q=90"
@@ -235,10 +237,10 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </Fade>
 
       {/* ══ 4. SERVICES — LIST MANIFEST ════════════════════════════ */}
-      <section style={{ padding: '70px 40px' }}>
+      <Fade as="section" style={{ padding: '70px 40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             What We Do
@@ -270,18 +272,18 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </Fade>
 
       {/* ══ 5. PORTFOLIO GALLERY ════════════════════════════════════ */}
       <section id="portfolio" style={{ padding: '0 40px 80px', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-        <div style={{ padding: '50px 0 32px', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 0 }}>
+        <Fade style={{ padding: '50px 0 32px', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 0 }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             Our Portfolio
           </h2>
           <span style={{ fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             {filtered.length} events
           </span>
-        </div>
+        </Fade>
         {/* Filter row */}
         <div style={{ display: 'flex', alignItems: 'center', padding: '0', borderBottom: '1px solid rgba(0,0,0,0.08)', marginBottom: 3 }}>
           {GALLERY_CATS.map(c => (
@@ -302,8 +304,8 @@ export default function HomePage() {
 
         {/* Grid — 3 equal columns, square-ish images, text below */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 3 }}>
-          {shown.map(e => (
-            <div key={e.id} style={{ cursor: 'pointer' }}>
+          {shown.map((e, i) => (
+            <Fade key={e.id} delay={(i % 3) * 0.1} style={{ cursor: 'pointer' }}>
               <div style={{ overflow: 'hidden' }}>
                 <img
                   src={e.img}
@@ -322,7 +324,7 @@ export default function HomePage() {
                 </div>
                 <span style={{ fontSize: 10, color: 'rgba(0,0,0,0.28)', marginTop: 2 }}>→</span>
               </div>
-            </div>
+            </Fade>
           ))}
         </div>
 
@@ -355,7 +357,7 @@ export default function HomePage() {
       </section>
 
       {/* ══ 6. ABOUT — LARGE IMAGE + TEXT ══════════════════════════ */}
-      <section style={{ display: 'grid', gridTemplateColumns: '55% 45%', minHeight: 560, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+      <Fade as="section" direction="in" style={{ display: 'grid', gridTemplateColumns: '55% 45%', minHeight: 560, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ overflow: 'hidden' }}>
           <img
             src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1000&q=88"
@@ -390,7 +392,7 @@ export default function HomePage() {
             Explore More <span style={{ fontSize: 14 }}>→</span>
           </button>
         </div>
-      </section>
+      </Fade>
 
       {/* ══ 7. CONTACT — FULL IMAGE + SECTION ══════════════════════ */}
       <section id="contact" ref={contactRef} style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
@@ -404,17 +406,17 @@ export default function HomePage() {
         </div>
 
         {/* Caption row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '36px 40px 36px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60, alignItems: 'center' }}>
+        <Fade style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '36px 40px 36px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60, alignItems: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0, lineHeight: 1.15 }}>
             Contact Us For<br />More Information
           </h2>
           <p style={{ fontSize: 13.5, lineHeight: 1.85, color: 'rgba(0,0,0,0.5)', margin: 0 }}>
             Each event we design is a testament to attention, craft, and a deep understanding of what our clients truly want. Tell us your vision.
           </p>
-        </div>
+        </Fade>
 
         {/* INQUIRY FORM */}
-        <div id="inquiry-form" style={{ padding: '60px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 100, alignItems: 'flex-start' }}>
+        <Fade delay={0.1} id="inquiry-form" style={{ padding: '60px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 100, alignItems: 'flex-start' }}>
           {/* Left: info */}
           <div>
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40 }}>
@@ -483,7 +485,7 @@ export default function HomePage() {
               </form>
             )}
           </div>
-        </div>
+        </Fade>
       </section>
 
       <Footer />
