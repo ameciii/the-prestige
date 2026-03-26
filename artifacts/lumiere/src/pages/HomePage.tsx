@@ -273,27 +273,30 @@ export default function HomePage() {
 
       {/* ══ 5. PORTFOLIO GALLERY ════════════════════════════════════ */}
       <section id="portfolio" className="lm-portfolio-section lm-pad-h" style={{ paddingBottom: 80, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-        <Fade style={{ padding: '50px 0 32px', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 0 }}>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
+        <Fade className="lm-gallery-header-fade" style={{ padding: '50px 0 32px', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 0 }}>
+          <h2 style={{ fontSize: 'clamp(26px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             Our Portfolio
           </h2>
-          <span style={{ fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <span className="lm-filter-count" style={{ fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             {filtered.length} events
           </span>
         </Fade>
         {/* Filter row */}
-        <div style={{ display: 'flex', alignItems: 'center', padding: '0', borderBottom: '1px solid rgba(0,0,0,0.08)', marginBottom: 3 }}>
+        <div className="lm-filter-row" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.08)', marginBottom: 3 }}>
           {GALLERY_CATS.map(c => (
-            <button key={c} onClick={() => { setCat(c); setVisible(6); }} style={{
-              background: 'none', border: 'none',
-              padding: '18px 24px',
-              fontSize: 9.5, fontWeight: 700,
-              letterSpacing: '0.2em', textTransform: 'uppercase',
-              cursor: 'pointer',
-              color: cat === c ? 'hsl(35 10% 14%)' : 'rgba(0,0,0,0.36)',
-              borderBottom: cat === c ? '2px solid hsl(35 10% 14%)' : '2px solid transparent',
-              marginBottom: -1, fontFamily: "'Nunito Sans', sans-serif",
-            }}>
+            <button key={c} onClick={() => { setCat(c); setVisible(6); }}
+              className="lm-filter-btn"
+              style={{
+                background: 'none', border: 'none',
+                padding: '18px 24px',
+                fontSize: 9.5, fontWeight: 700,
+                letterSpacing: '0.2em', textTransform: 'uppercase',
+                cursor: 'pointer',
+                color: cat === c ? 'hsl(35 10% 14%)' : 'rgba(0,0,0,0.36)',
+                borderBottom: cat === c ? '2px solid hsl(35 10% 14%)' : '2px solid transparent',
+                marginBottom: -1, fontFamily: "'Nunito Sans', sans-serif",
+                whiteSpace: 'nowrap',
+              }}>
               {c}
             </button>
           ))}
@@ -312,7 +315,7 @@ export default function HomePage() {
                   onMouseLeave={ev => (ev.currentTarget.style.transform = 'scale(1)')}
                 />
               </div>
-              <div style={{ padding: '12px 0 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div className="lm-hp-card-text" style={{ padding: '12px 0 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 4 }}>{e.title}</div>
                   <div style={{ fontSize: 10, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>

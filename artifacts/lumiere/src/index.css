@@ -329,6 +329,10 @@
 
   .lm-nav-pad { padding-left: 20px !important; padding-right: 20px !important; }
 
+  /* Homepage gallery section */
+  .lm-gallery-header-fade { padding: 28px 0 20px !important; }
+  .lm-hp-card-text { padding-bottom: 20px !important; }
+
   /* Portfolio mobile overrides */
   .lm-portfolio-header { padding-top: 28px !important; padding-bottom: 24px !important; }
   .lm-portfolio-header-inner { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
