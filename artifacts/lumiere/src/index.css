@@ -328,6 +328,20 @@
   .lm-portfolio-section { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; }
 
   .lm-nav-pad { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Portfolio mobile overrides */
+  .lm-portfolio-header { padding-top: 28px !important; padding-bottom: 24px !important; }
+  .lm-portfolio-header-inner { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+  .lm-portfolio-header-desc { max-width: 100% !important; font-size: 12px !important; }
+
+  .lm-filter-row { flex-wrap: nowrap !important; overflow-x: auto !important; }
+  .lm-filter-row::-webkit-scrollbar { display: none; }
+  .lm-filter-btn { padding: 14px 10px !important; font-size: 8px !important; letter-spacing: 0.08em !important; flex-shrink: 0; }
+  .lm-filter-count { display: none !important; }
+
+  .lm-portfolio-grid-wrap { padding-top: 0 !important; padding-bottom: 60px !important; }
+  .lm-grid-3 { gap: 1px !important; }
+  .lm-portfolio-card-text { padding-top: 12px !important; padding-bottom: 20px !important; }
 }
 
 /* ─── ANIMATION KEYFRAMES ──────────────────────────────────────── */

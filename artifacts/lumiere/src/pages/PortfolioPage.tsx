@@ -30,28 +30,29 @@ export default function PortfolioPage() {
       <div style={{ paddingTop: 80 }}>
 
         {/* PAGE HEADER */}
-        <Fade as="section" direction="in" className="lm-pad-h" style={{ paddingTop: 50, paddingBottom: 40, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
+        <Fade as="section" direction="in" className="lm-pad-h lm-portfolio-header" style={{ paddingTop: 50, paddingBottom: 40, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+          <div className="lm-portfolio-header-inner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
             <div>
               <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 14 }}>
                 Our Work
               </div>
-              <h1 style={{ fontSize: 'clamp(42px, 5.5vw, 70px)', fontWeight: 200, margin: 0, letterSpacing: '-0.02em', lineHeight: 1.05, textTransform: 'uppercase' }}>
+              <h1 style={{ fontSize: 'clamp(36px, 5.5vw, 70px)', fontWeight: 200, margin: 0, letterSpacing: '-0.02em', lineHeight: 1.05, textTransform: 'uppercase' }}>
                 Portfolio
               </h1>
             </div>
-            <p style={{ fontSize: 13, lineHeight: 1.85, color: 'rgba(0,0,0,0.48)', maxWidth: 360, margin: 0 }}>
+            <p className="lm-portfolio-header-desc" style={{ fontSize: 13, lineHeight: 1.85, color: 'rgba(0,0,0,0.48)', maxWidth: 360, margin: 0 }}>
               A curated collection of our finest events — each one a testament to meticulous craft and creative vision.
             </p>
           </div>
         </Fade>
 
         {/* FILTER TABS */}
-        <section className="lm-pad-h" style={{ display: 'flex', alignItems: 'center', overflowX: 'auto', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+        <section className="lm-pad-h lm-filter-row" style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
           {CATEGORIES.map(cat => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
+              className="lm-filter-btn"
               style={{
                 background: 'none', border: 'none',
                 padding: '18px 22px',
@@ -63,18 +64,19 @@ export default function PortfolioPage() {
                 marginBottom: -1,
                 transition: 'all 0.2s',
                 fontFamily: "'Nunito Sans', sans-serif",
+                whiteSpace: 'nowrap',
               }}
             >
               {cat}
             </button>
           ))}
-          <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em' }}>
+          <span className="lm-filter-count" style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em', whiteSpace: 'nowrap' }}>
             {filtered.length} events
           </span>
         </section>
 
         {/* GRID — 3 columns, text labels below (no overlay) */}
-        <section className="lm-pad-h lm-portfolio-section" style={{ paddingTop: 3, paddingBottom: 100 }}>
+        <section className="lm-pad-h lm-portfolio-section lm-portfolio-grid-wrap" style={{ paddingTop: 3, paddingBottom: 100 }}>
           <div className="lm-grid-3">
             {filtered.map((item, i) => (
               <Fade key={item.id} delay={(i % 3) * 0.1}>
@@ -90,7 +92,7 @@ export default function PortfolioPage() {
                     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
                   />
                 </div>
-                <div style={{ paddingTop: 14, paddingBottom: 28, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+                <div className="lm-portfolio-card-text" style={{ paddingTop: 14, paddingBottom: 28, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
                   <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 8 }}>
                     {item.cat}
                   </div>
