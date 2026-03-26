@@ -8,13 +8,7 @@ export function Footer() {
   return (
     <footer style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
       {/* Top columns */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr 1fr',
-        padding: '60px 40px 50px',
-        borderBottom: '1px solid rgba(0,0,0,0.08)',
-        gap: 40,
-      }}>
+      <div className="lm-grid-footer lm-pad-h" style={{ paddingTop: 60, paddingBottom: 50, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div>
           <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 28, color: 'hsl(35 10% 14%)' }}>
             LUMIÈRE
@@ -42,13 +36,7 @@ export function Footer() {
       </div>
 
       {/* Inline contact / form row */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '28px 40px',
-        borderBottom: '1px solid rgba(0,0,0,0.08)',
-        gap: 40,
-      }}>
+      <div className="lm-footer-row lm-pad-h" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)', flexShrink: 0 }}>
           CONTACT
         </span>
@@ -90,7 +78,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 40px' }}>
+      <div className="lm-pad-h" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 20 }}>
         <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
           © 2025 LUMIÈRE. All Rights Reserved.
         </span>

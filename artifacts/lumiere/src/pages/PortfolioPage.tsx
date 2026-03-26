@@ -30,7 +30,7 @@ export default function PortfolioPage() {
       <div style={{ paddingTop: 80 }}>
 
         {/* PAGE HEADER */}
-        <Fade as="section" direction="in" style={{ padding: '50px 40px 40px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+        <Fade as="section" direction="in" className="lm-pad-h" style={{ paddingTop: 50, paddingBottom: 40, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24 }}>
             <div>
               <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 14 }}>
@@ -47,7 +47,7 @@ export default function PortfolioPage() {
         </Fade>
 
         {/* FILTER TABS */}
-        <section style={{ display: 'flex', alignItems: 'center', padding: '0 40px', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+        <section className="lm-pad-h" style={{ display: 'flex', alignItems: 'center', overflowX: 'auto', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
           {CATEGORIES.map(cat => (
             <button
               key={cat}
@@ -74,8 +74,8 @@ export default function PortfolioPage() {
         </section>
 
         {/* GRID — 3 columns, text labels below (no overlay) */}
-        <section style={{ padding: '3px 40px 100px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 3 }}>
+        <section className="lm-pad-h lm-portfolio-section" style={{ paddingTop: 3, paddingBottom: 100 }}>
+          <div className="lm-grid-3">
             {filtered.map((item, i) => (
               <Fade key={item.id} delay={(i % 3) * 0.1}>
                 <div style={{ overflow: 'hidden' }}>
@@ -107,9 +107,9 @@ export default function PortfolioPage() {
         </section>
 
         {/* CTA */}
-        <Fade as="section" style={{
+        <Fade as="section" className="lm-pad-h" style={{
           borderTop: '1px solid rgba(0,0,0,0.08)',
-          padding: '60px 40px',
+          paddingTop: 60, paddingBottom: 60,
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 32,
         }}>
           <div>

@@ -113,7 +113,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom-right: two equal-size clickable project thumbnails */}
-        <div style={{ position: 'absolute', bottom: 0, right: 0, display: 'flex', gap: 2, animation: 'lm-fade-in 1s ease 0.85s both' }}>
+        <div className="lm-hero-thumbs">
           {[
             { title: 'The Tuscany Wedding', cat: 'Wedding', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=85' },
             { title: 'Azure Summit', cat: 'Corporate', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&q=85' },
@@ -152,10 +152,7 @@ export default function HomePage() {
       </section>
 
       {/* Hero caption row */}
-      <Fade style={{
-        display: 'grid', gridTemplateColumns: '1fr 1fr',
-        padding: '32px 40px 48px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60,
-      }}>
+      <Fade className="lm-grid-2sym lm-pad-h" style={{ paddingTop: 32, paddingBottom: 48, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div>
           <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', color: 'hsl(35 10% 14%)', lineHeight: 1.5, textTransform: 'uppercase' }}>
             That's the vision<br />behind LUMIÈRE
@@ -177,8 +174,8 @@ export default function HomePage() {
       </Fade>
 
       {/* ══ 2. INTRODUCING EVENTS — 3-COL PORTRAIT GRID ═══════════ */}
-      <section style={{ padding: '70px 40px 0' }}>
-        <Fade style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36 }}>
+      <section className="lm-pad-h" style={{ paddingTop: 70 }}>
+        <Fade className="lm-intro-hdr">
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             Introducing Events
           </h2>
@@ -186,7 +183,7 @@ export default function HomePage() {
             All Events →
           </Link>
         </Fade>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 3 }}>
+        <div className="lm-grid-3">
           {INTRO_EVENTS.map((e, i) => (
             <Fade key={e.id} delay={i * 0.12}>
               <div style={{ overflow: 'hidden' }}>
@@ -219,7 +216,7 @@ export default function HomePage() {
             style={{ width: '100%', height: '70vh', minHeight: 500, objectFit: 'cover', display: 'block' }}
           />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '28px 40px 60px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60 }}>
+        <div className="lm-grid-2sym lm-pad-h" style={{ paddingTop: 28, paddingBottom: 60, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
           <div>
             <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', lineHeight: 1.5 }}>
               That's the ceremony<br />at Maldives Barefoot
@@ -240,7 +237,7 @@ export default function HomePage() {
       </Fade>
 
       {/* ══ 4. SERVICES — LIST MANIFEST ════════════════════════════ */}
-      <Fade as="section" style={{ padding: '70px 40px' }}>
+      <Fade as="section" className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             What We Do
@@ -254,9 +251,9 @@ export default function HomePage() {
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+        <div className="lm-grid-svc">
           {SERVICES_LIST.map((s, i) => (
-            <div key={s.name} style={{
+            <div key={s.name} className="lm-svc-item" style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               padding: '22px 0',
               borderBottom: '1px solid rgba(0,0,0,0.08)',
@@ -275,7 +272,7 @@ export default function HomePage() {
       </Fade>
 
       {/* ══ 5. PORTFOLIO GALLERY ════════════════════════════════════ */}
-      <section id="portfolio" style={{ padding: '0 40px 80px', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+      <section id="portfolio" className="lm-portfolio-section lm-pad-h" style={{ paddingBottom: 80, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <Fade style={{ padding: '50px 0 32px', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 0 }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             Our Portfolio
@@ -303,7 +300,7 @@ export default function HomePage() {
         </div>
 
         {/* Grid — 3 equal columns, square-ish images, text below */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 3 }}>
+        <div className="lm-grid-3">
           {shown.map((e, i) => (
             <Fade key={e.id} delay={(i % 3) * 0.1} style={{ cursor: 'pointer' }}>
               <div style={{ overflow: 'hidden' }}>
@@ -357,7 +354,7 @@ export default function HomePage() {
       </section>
 
       {/* ══ 6. ABOUT — LARGE IMAGE + TEXT ══════════════════════════ */}
-      <Fade as="section" direction="in" style={{ display: 'grid', gridTemplateColumns: '55% 45%', minHeight: 560, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+      <Fade as="section" direction="in" className="lm-grid-2asym" style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ overflow: 'hidden' }}>
           <img
             src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1000&q=88"
@@ -365,7 +362,7 @@ export default function HomePage() {
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         </div>
-        <div style={{ padding: '70px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className="lm-about-text" style={{ padding: '70px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 24 }}>
               The Studio
@@ -406,7 +403,7 @@ export default function HomePage() {
         </div>
 
         {/* Caption row */}
-        <Fade style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '36px 40px 36px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60, alignItems: 'center' }}>
+        <Fade className="lm-grid-2sym lm-pad-h" style={{ paddingTop: 36, paddingBottom: 36, borderBottom: '1px solid rgba(0,0,0,0.08)', alignItems: 'center' }}>
           <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0, lineHeight: 1.15 }}>
             Contact Us For<br />More Information
           </h2>
@@ -416,7 +413,7 @@ export default function HomePage() {
         </Fade>
 
         {/* INQUIRY FORM */}
-        <Fade delay={0.1} id="inquiry-form" style={{ padding: '60px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 100, alignItems: 'flex-start' }}>
+        <Fade delay={0.1} id="inquiry-form" className="lm-grid-form lm-pad-h" style={{ paddingTop: 60, paddingBottom: 80 }}>
           {/* Left: info */}
           <div>
             <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40 }}>

@@ -261,6 +261,75 @@
   background: rgba(255,255,255,0.1);
 }
 
+/* ─── RESPONSIVE LAYOUT CLASSES ──────────────────────────────── */
+
+/* Horizontal section padding */
+.lm-pad-h { padding-left: 40px; padding-right: 40px; }
+
+/* Grids */
+.lm-grid-3     { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+.lm-grid-2sym  { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.lm-grid-2asym { display: grid; grid-template-columns: 55% 45%; min-height: 560px; }
+.lm-grid-form  { display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: flex-start; }
+.lm-grid-svc   { display: grid; grid-template-columns: 1fr 1fr; }
+.lm-grid-footer{ display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; }
+
+/* Row helpers */
+.lm-intro-hdr  { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; }
+.lm-footer-row { display: flex; align-items: center; gap: 40px; }
+
+/* Nav mobile menu overlay */
+.lm-mobile-menu {
+  display: none;
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(16px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  padding: 80px 40px 40px;
+}
+.lm-mobile-menu.open { display: flex; }
+
+/* Hero thumbs — hidden on mobile */
+.lm-hero-thumbs { position: absolute; bottom: 0; right: 0; display: flex; gap: 2px; animation: lm-fade-in 1s ease 0.85s both; }
+
+/* Tablet — 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .lm-grid-3      { grid-template-columns: repeat(2,1fr) !important; }
+  .lm-grid-footer { grid-template-columns: repeat(2,1fr) !important; }
+  .lm-pad-h       { padding-left: 28px; padding-right: 28px; }
+}
+
+/* Mobile — up to 767px */
+@media (max-width: 767px) {
+  .lm-nav-links-desktop { display: none !important; }
+  .lm-hamburger { display: flex !important; }
+
+  .lm-pad-h      { padding-left: 20px !important; padding-right: 20px !important; }
+
+  .lm-hero-thumbs { display: none !important; }
+
+  .lm-grid-3     { grid-template-columns: 1fr !important; gap: 0 !important; }
+  .lm-grid-2sym  { grid-template-columns: 1fr !important; gap: 28px !important; align-items: flex-start !important; }
+  .lm-grid-2asym { grid-template-columns: 1fr !important; min-height: 0 !important; }
+  .lm-grid-form  { grid-template-columns: 1fr !important; gap: 48px !important; padding: 40px 20px 60px !important; }
+  .lm-grid-svc   { grid-template-columns: 1fr !important; }
+  .lm-grid-footer{ grid-template-columns: 1fr 1fr !important; }
+
+  .lm-intro-hdr  { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; margin-bottom: 24px !important; }
+  .lm-footer-row { flex-direction: column !important; align-items: stretch !important; gap: 14px !important; padding-top: 20px !important; padding-bottom: 20px !important; }
+
+  .lm-svc-item { border-right: none !important; padding-left: 0 !important; padding-right: 0 !important; }
+
+  .lm-about-text { padding: 40px 24px !important; }
+
+  .lm-portfolio-section { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; }
+
+  .lm-nav-pad { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
 /* ─── ANIMATION KEYFRAMES ──────────────────────────────────────── */
 @keyframes lm-fade-up {
   from { opacity: 0; transform: translateY(28px); }
