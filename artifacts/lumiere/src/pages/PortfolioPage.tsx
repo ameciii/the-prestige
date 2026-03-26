@@ -89,17 +89,15 @@ export default function PortfolioPage() {
                     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
                   />
                 </div>
-                <div style={{ padding: '12px 0 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div>
-                    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 4 }}>{item.title}</div>
-                    <div style={{ fontSize: 10, color: 'rgba(0,0,0,0.38)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                      {item.location}
-                      <span style={{ margin: '0 8px', opacity: 0.5 }}>·</span>
-                      {item.year}
-                    </div>
-                  </div>
-                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.28)', border: '1px solid rgba(0,0,0,0.12)', padding: '4px 10px', flexShrink: 0, marginTop: 2 }}>
+                <div style={{ paddingTop: 14, paddingBottom: 28, borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+                  <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 8 }}>
                     {item.cat}
+                  </div>
+                  <div style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 5 }}>{item.title}</div>
+                  <div style={{ fontSize: 10.5, color: 'rgba(0,0,0,0.38)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    {item.location}
+                    <span style={{ margin: '0 8px', opacity: 0.4 }}>·</span>
+                    {item.year}
                   </div>
                 </div>
               </div>
