@@ -9,7 +9,7 @@ export function Footer() {
     }}>
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1fr 1fr 1fr',
+        gridTemplateColumns: '2fr 1fr 1fr',
         gap: '60px',
         marginBottom: '60px',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
@@ -28,12 +28,6 @@ export function Footer() {
           { label: 'Corporate Events', href: '/portfolio' },
           { label: 'Private Events', href: '/portfolio' },
           { label: 'Destination Events', href: '/portfolio' },
-        ]} />
-        <FooterCol title="Company" links={[
-          { label: 'About', href: '/' },
-          { label: 'Portfolio', href: '/portfolio' },
-          { label: 'Blog', href: '/blog' },
-          { label: 'Careers', href: '/career' },
         ]} />
         <FooterCol title="Contact" links={[
           { label: 'hello@lumiere-events.com', href: 'mailto:hello@lumiere-events.com', external: true },

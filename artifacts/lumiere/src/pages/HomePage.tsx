@@ -4,12 +4,6 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 
 /* ─── DATA ─────────────────────────────────────────────────────── */
-const STATS = [
-  { value: '12+', label: 'Years of Excellence' },
-  { value: '800+', label: 'Events Crafted' },
-  { value: '40+', label: 'Countries Served' },
-  { value: '98%', label: 'Client Satisfaction' },
-];
 
 const SERVICES = [
   {
@@ -118,15 +112,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS BAR ───────────────────────────────────────────── */}
-      <section style={{ background: 'hsl(35 10% 16%)', padding: '46px 60px', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
-        {STATS.map((s, i) => (
-          <div key={s.value} style={{ textAlign: 'center', padding: '14px 20px', borderRight: i < 3 ? '1px solid rgba(255,255,255,0.09)' : 'none' }}>
-            <div style={{ fontSize: 40, fontWeight: 200, color: '#fff', letterSpacing: '-0.02em', marginBottom: 6 }}>{s.value}</div>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.36)' }}>{s.label}</div>
-          </div>
-        ))}
-      </section>
 
       {/* ── 2. ABOUT ────────────────────────────────────────────── */}
       <section id="about" style={{ padding: '120px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 100, alignItems: 'center' }}>

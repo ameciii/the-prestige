@@ -4,8 +4,6 @@ import { Link, useLocation } from 'wouter';
 const LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Career', href: '/career' },
 ];
 
 interface NavProps {
