@@ -110,18 +110,41 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Bottom-right: two mini project thumbnails */}
+        {/* Bottom-right: two equal-size clickable project thumbnails */}
         <div style={{ position: 'absolute', bottom: 0, right: 0, display: 'flex', gap: 2 }}>
           {[
-            { title: 'THE TUSCANY WEDDING', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=320&q=80' },
-            { title: 'AZURE SUMMIT', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=320&q=80' },
+            { title: 'The Tuscany Wedding', cat: 'Wedding', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=85' },
+            { title: 'Azure Summit', cat: 'Corporate', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&q=85' },
           ].map(t => (
-            <div key={t.title} style={{ position: 'relative', width: 190, height: 150 }}>
-              <img src={t.img} alt={t.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.55)', padding: '8px 10px' }}>
-                <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.18em', color: '#fff', textTransform: 'uppercase' }}>{t.title}</div>
+            <Link
+              key={t.title}
+              href="/portfolio"
+              style={{
+                position: 'relative',
+                display: 'block',
+                width: 200,
+                height: 160,
+                overflow: 'hidden',
+                flexShrink: 0,
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                src={t.img}
+                alt={t.title}
+                style={{
+                  width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+                  transition: 'transform 0.4s ease',
+                }}
+                onMouseEnter={ev => { ev.currentTarget.style.transform = 'scale(1.06)'; }}
+                onMouseLeave={ev => { ev.currentTarget.style.transform = 'scale(1)'; }}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 55%)', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 12px', pointerEvents: 'none' }}>
+                <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: 3 }}>{t.cat}</div>
+                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.14em', color: '#fff', textTransform: 'uppercase' }}>{t.title}</div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
