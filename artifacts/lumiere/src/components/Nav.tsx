@@ -8,7 +8,11 @@ const LINKS = [
   { label: 'Career', href: '/career' },
 ];
 
-export function Nav() {
+interface NavProps {
+  onContactClick?: () => void;
+}
+
+export function Nav({ onContactClick }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
 
@@ -17,6 +21,15 @@ export function Nav() {
     window.addEventListener('scroll', handle);
     return () => window.removeEventListener('scroll', handle);
   }, []);
+
+  const handleContact = () => {
+    if (onContactClick) {
+      onContactClick();
+    } else {
+      const el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className={`lm-nav ${scrolled ? 'scrolled' : ''}`}>
@@ -32,9 +45,9 @@ export function Nav() {
           </li>
         ))}
       </ul>
-      <Link href="/portfolio" className="lm-btn lm-btn-dark" style={{ padding: '10px 22px', fontSize: '10px' }}>
+      <button onClick={handleContact} className="lm-btn lm-btn-dark" style={{ padding: '10px 22px', fontSize: '10px' }}>
         Get In Touch
-      </Link>
+      </button>
     </nav>
   );
 }
