@@ -73,24 +73,52 @@ export default function HomePage() {
           alt="Hero"
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
-        {/* Subtle vignette bottom */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,0.36) 100%)' }} />
+        {/* Gradient overlay — heavier at bottom for text legibility */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0.65) 100%)' }} />
+
+        {/* Bottom-left: headline + CTA */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 40px 44px', maxWidth: 640 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: 18, marginTop: 0 }}>
+            Event Design & Production
+          </p>
+          <h1 style={{
+            fontSize: 'clamp(44px, 5.5vw, 72px)', fontWeight: 200, lineHeight: 1.06,
+            letterSpacing: '-0.01em', color: '#fff', margin: '0 0 32px',
+          }}>
+            Where Moments<br />Become <em style={{ fontStyle: 'italic', fontWeight: 300 }}>Extraordinary</em>
+          </h1>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button onClick={scrollToContact} style={{
+              background: '#fff', color: 'hsl(35 10% 14%)',
+              border: 'none', padding: '13px 28px',
+              fontSize: 10, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
+              cursor: 'pointer', fontFamily: "'Nunito Sans', sans-serif",
+            }}>
+              Plan Your Event
+            </button>
+            <button
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+              style={{
+                background: 'transparent', color: '#fff',
+                border: '1px solid rgba(255,255,255,0.45)', padding: '13px 28px',
+                fontSize: 10, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
+                cursor: 'pointer', fontFamily: "'Nunito Sans', sans-serif",
+              }}
+            >
+              View Our Work →
+            </button>
+          </div>
+        </div>
 
         {/* Bottom-right: two mini project thumbnails */}
-        <div style={{
-          position: 'absolute', bottom: 0, right: 0,
-          display: 'flex', gap: 2,
-        }}>
+        <div style={{ position: 'absolute', bottom: 0, right: 0, display: 'flex', gap: 2 }}>
           {[
             { title: 'THE TUSCANY WEDDING', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=320&q=80' },
             { title: 'AZURE SUMMIT', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=320&q=80' },
           ].map(t => (
             <div key={t.title} style={{ position: 'relative', width: 190, height: 150 }}>
               <img src={t.img} alt={t.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              <div style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0,
-                background: 'rgba(0,0,0,0.55)', padding: '8px 10px',
-              }}>
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.55)', padding: '8px 10px' }}>
                 <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.18em', color: '#fff', textTransform: 'uppercase' }}>{t.title}</div>
               </div>
             </div>
@@ -124,9 +152,14 @@ export default function HomePage() {
       </div>
 
       {/* ══ 2. INTRODUCING EVENTS — 3-COL PORTRAIT GRID ═══════════ */}
-      <section style={{ padding: '60px 40px 0' }}>
-        <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 28 }}>
-          Introducing Events
+      <section style={{ padding: '70px 40px 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 36 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
+            Introducing Events
+          </h2>
+          <Link href="/portfolio" style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)', textDecoration: 'none' }}>
+            All Events →
+          </Link>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 3 }}>
           {INTRO_EVENTS.map(e => (
@@ -140,14 +173,12 @@ export default function HomePage() {
                   onMouseLeave={ev => (ev.currentTarget.style.transform = 'scale(1)')}
                 />
               </div>
-              <div style={{ paddingTop: 14, paddingBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-                <div>
-                  <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 4 }}>{e.title}</div>
-                  <div style={{ fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)' }}>{e.location}</div>
-                </div>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.28)', border: '1px solid rgba(0,0,0,0.12)', padding: '4px 10px', flexShrink: 0, marginTop: 2 }}>
+              <div style={{ paddingTop: 14, paddingBottom: 28, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 8 }}>
                   {e.cat}
                 </div>
+                <div style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 5 }}>{e.title}</div>
+                <div style={{ fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)' }}>{e.location}</div>
               </div>
             </div>
           ))}
@@ -184,11 +215,11 @@ export default function HomePage() {
       </section>
 
       {/* ══ 4. SERVICES — LIST MANIFEST ════════════════════════════ */}
-      <section style={{ padding: '60px 40px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
-          <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)' }}>
+      <section style={{ padding: '70px 40px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 40, flexWrap: 'wrap', gap: 20 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
             What We Do
-          </div>
+          </h2>
           <button onClick={scrollToContact} style={{
             background: 'hsl(35 10% 14%)', color: '#fff', border: 'none', cursor: 'pointer',
             padding: '10px 26px', fontSize: 9.5, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
@@ -220,6 +251,14 @@ export default function HomePage() {
 
       {/* ══ 5. PORTFOLIO GALLERY ════════════════════════════════════ */}
       <section id="portfolio" style={{ padding: '0 40px 80px', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+        <div style={{ padding: '50px 0 32px', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 0 }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0 }}>
+            Our Portfolio
+          </h2>
+          <span style={{ fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            {filtered.length} events
+          </span>
+        </div>
         {/* Filter row */}
         <div style={{ display: 'flex', alignItems: 'center', padding: '0', borderBottom: '1px solid rgba(0,0,0,0.08)', marginBottom: 3 }}>
           {GALLERY_CATS.map(c => (
@@ -236,9 +275,6 @@ export default function HomePage() {
               {c}
             </button>
           ))}
-          <span style={{ marginLeft: 'auto', fontSize: 10, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.1em' }}>
-            {filtered.length} events
-          </span>
         </div>
 
         {/* Grid — 3 equal columns, square-ish images, text below */}
@@ -306,12 +342,12 @@ export default function HomePage() {
         </div>
         <div style={{ padding: '70px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 28 }}>
-              The Creator
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 24 }}>
+              The Studio
             </div>
-            <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'hsl(35 10% 14%)', marginBottom: 6 }}>
+            <h2 style={{ fontSize: 'clamp(26px, 2.6vw, 38px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: '0 0 8px' }}>
               LUMIÈRE EVENTS
-            </div>
+            </h2>
             <div style={{ fontSize: 11.5, color: 'rgba(0,0,0,0.42)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 28 }}>
               Boutique Event Design Studio
             </div>
@@ -345,32 +381,20 @@ export default function HomePage() {
         </div>
 
         {/* Caption row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '28px 40px 0', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60 }}>
-          <div style={{ paddingBottom: 28 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', lineHeight: 1.5 }}>
-              Contact Us For<br />More Information
-            </div>
-          </div>
-          <div style={{ paddingBottom: 28 }}>
-            <p style={{ fontSize: 13, lineHeight: 1.85, color: 'rgba(0,0,0,0.5)', margin: '0 0 22px' }}>
-              Each event we design is a testament to attention, craft, and a deep understanding of what our clients truly want. Tell us your vision.
-            </p>
-            <button onClick={() => document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' })} style={{
-              background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-              fontSize: 10.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
-              color: 'hsl(35 10% 14%)', fontFamily: "'Nunito Sans', sans-serif",
-              display: 'inline-flex', alignItems: 'center', gap: 16,
-            }}>
-              Contact Us <span style={{ fontSize: 14 }}>→</span>
-            </button>
-          </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', padding: '36px 40px 36px', borderBottom: '1px solid rgba(0,0,0,0.08)', gap: 60, alignItems: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 3vw, 40px)', fontWeight: 200, letterSpacing: '-0.01em', textTransform: 'uppercase', margin: 0, lineHeight: 1.15 }}>
+            Contact Us For<br />More Information
+          </h2>
+          <p style={{ fontSize: 13.5, lineHeight: 1.85, color: 'rgba(0,0,0,0.5)', margin: 0 }}>
+            Each event we design is a testament to attention, craft, and a deep understanding of what our clients truly want. Tell us your vision.
+          </p>
         </div>
 
         {/* INQUIRY FORM */}
-        <div id="inquiry-form" style={{ padding: '60px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 80, alignItems: 'flex-start' }}>
+        <div id="inquiry-form" style={{ padding: '60px 40px 80px', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 100, alignItems: 'flex-start' }}>
           {/* Left: info */}
           <div>
-            <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 32 }}>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 40 }}>
               Get In Touch
             </div>
             {[
@@ -378,33 +402,31 @@ export default function HomePage() {
               { label: 'Phone', val: '+62 21 5050 1234' },
               { label: 'Office', val: 'Jakarta, Indonesia' },
               { label: 'Hours', val: 'Mon – Sat, 9am – 6pm WIB' },
-            ].map(c => (
-              <div key={c.label} style={{ marginBottom: 26 }}>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 6 }}>{c.label}</div>
-                <div style={{ fontSize: 13.5, color: 'hsl(35 10% 14%)', letterSpacing: '0.02em' }}>{c.val}</div>
+            ].map((c, i) => (
+              <div key={c.label} style={{ paddingBottom: 24, marginBottom: 24, borderBottom: i < 3 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
+                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.28)', marginBottom: 8 }}>{c.label}</div>
+                <div style={{ fontSize: 14, color: 'hsl(35 10% 14%)', letterSpacing: '0.01em' }}>{c.val}</div>
               </div>
             ))}
           </div>
 
-          {/* Right: form */}
+          {/* Right: form — editorial underline style */}
           <div>
             {sent ? (
-              <div style={{ padding: '60px 0', textAlign: 'center' }}>
-                <div style={{ fontSize: 28, marginBottom: 18, color: 'hsl(35 5% 52%)' }}>✦</div>
-                <div style={{ fontSize: 16, fontWeight: 300, letterSpacing: '0.06em', marginBottom: 12, textTransform: 'uppercase', color: 'hsl(35 10% 14%)' }}>Thank You</div>
+              <div style={{ padding: '80px 0', textAlign: 'center' }}>
+                <div style={{ fontSize: 32, marginBottom: 20, color: 'rgba(0,0,0,0.2)' }}>✦</div>
+                <div style={{ fontSize: 18, fontWeight: 200, letterSpacing: '0.08em', marginBottom: 14, textTransform: 'uppercase', color: 'hsl(35 10% 14%)' }}>Thank You</div>
                 <p style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)', lineHeight: 1.8, margin: 0 }}>We've received your inquiry and will respond within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={e => { e.preventDefault(); setSent(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
-                  <FField label="Full Name *" type="text" placeholder="Your name" value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} required />
-                  <FField label="Email Address *" type="email" placeholder="your@email.com" value={form.email} onChange={v => setForm(f => ({ ...f, email: v }))} required />
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
-                  <FField label="Phone" type="tel" placeholder="+62 8xx xxxx xxxx" value={form.phone} onChange={v => setForm(f => ({ ...f, phone: v }))} />
-                  <div style={{ marginBottom: 3 }}>
-                    <label style={fLabel}>Event Type</label>
-                    <select value={form.type} onChange={e => setForm(f => ({ ...f, type: e.target.value }))} style={{ ...fInput, color: form.type ? 'hsl(35 10% 14%)' : 'rgba(0,0,0,0.38)' }}>
+              <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 40px' }}>
+                  <UField label="Full Name" type="text" placeholder="Your name" value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} required />
+                  <UField label="Email Address" type="email" placeholder="your@email.com" value={form.email} onChange={v => setForm(f => ({ ...f, email: v }))} required />
+                  <UField label="Phone" type="tel" placeholder="+62 8xx xxxx xxxx" value={form.phone} onChange={v => setForm(f => ({ ...f, phone: v }))} />
+                  <div style={{ marginBottom: 32 }}>
+                    <label style={uLabel}>Event Type</label>
+                    <select value={form.type} onChange={e => setForm(f => ({ ...f, type: e.target.value }))} style={{ ...uInput, color: form.type ? 'hsl(35 10% 14%)' : 'rgba(0,0,0,0.38)' }}>
                       <option value="">Select type</option>
                       <option>Wedding</option>
                       <option>Corporate Event</option>
@@ -413,26 +435,26 @@ export default function HomePage() {
                     </select>
                   </div>
                 </div>
-                <FField label="Preferred Event Date" type="date" placeholder="" value={form.date} onChange={v => setForm(f => ({ ...f, date: v }))} />
-                <div style={{ marginBottom: 3 }}>
-                  <label style={fLabel}>Message *</label>
+                <UField label="Preferred Event Date" type="date" placeholder="" value={form.date} onChange={v => setForm(f => ({ ...f, date: v }))} />
+                <div style={{ marginBottom: 32 }}>
+                  <label style={uLabel}>Message</label>
                   <textarea
-                    required rows={5}
+                    required rows={4}
                     placeholder="Tell us about your vision — venue ideas, guest count, any special requests…"
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                    style={{ ...fInput, resize: 'vertical', minHeight: 120 }}
+                    style={{ ...uInput, resize: 'none' }}
                   />
                 </div>
                 <button type="submit" style={{
                   background: 'hsl(35 10% 14%)', color: '#fff',
-                  border: 'none', padding: '16px 0', marginTop: 3,
-                  fontSize: 10, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase',
-                  cursor: 'pointer', width: '100%', fontFamily: "'Nunito Sans', sans-serif",
+                  border: 'none', padding: '15px 0', width: '100%',
+                  fontSize: 10, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase',
+                  cursor: 'pointer', fontFamily: "'Nunito Sans', sans-serif",
                 }}>
                   Send Inquiry →
                 </button>
-                <p style={{ fontSize: 10.5, color: 'rgba(0,0,0,0.35)', marginTop: 14, lineHeight: 1.7, marginBottom: 0 }}>
+                <p style={{ fontSize: 11, color: 'rgba(0,0,0,0.3)', marginTop: 16, lineHeight: 1.7, marginBottom: 0 }}>
                   We respond within 24 hours. For urgent matters, call us directly.
                 </p>
               </form>
@@ -446,44 +468,42 @@ export default function HomePage() {
   );
 }
 
-/* ─── FORM HELPERS ──────────────────────────────────────────────── */
-const fLabel: React.CSSProperties = {
+/* ─── FORM HELPERS — editorial underline style ──────────────────── */
+const uLabel: React.CSSProperties = {
   display: 'block',
   fontSize: 9,
   fontWeight: 700,
   letterSpacing: '0.26em',
-  textTransform: 'uppercase',
-  color: 'rgba(0,0,0,0.35)',
-  marginBottom: 0,
-  padding: '12px 14px 0',
-  background: 'hsl(40 20% 97%)',
+  textTransform: 'uppercase' as const,
+  color: 'rgba(0,0,0,0.3)',
+  marginBottom: 10,
 };
 
-const fInput: React.CSSProperties = {
+const uInput: React.CSSProperties = {
   width: '100%',
   border: 'none',
-  borderBottom: '1px solid rgba(0,0,0,0.1)',
-  padding: '10px 14px 12px',
-  fontSize: 13,
+  borderBottom: '1px solid rgba(0,0,0,0.15)',
+  padding: '0 0 12px',
+  fontSize: 14,
   outline: 'none',
-  background: 'hsl(40 20% 97%)',
+  background: 'transparent',
   fontFamily: "'Nunito Sans', sans-serif",
   color: 'hsl(35 10% 14%)',
-  boxSizing: 'border-box',
+  boxSizing: 'border-box' as const,
   display: 'block',
 };
 
-function FField({ label, type, placeholder, value, onChange, required }: {
+function UField({ label, type, placeholder, value, onChange, required }: {
   label: string; type: string; placeholder: string;
   value: string; onChange: (v: string) => void; required?: boolean;
 }) {
   return (
-    <div style={{ marginBottom: 3 }}>
-      <label style={fLabel}>{label}</label>
+    <div style={{ marginBottom: 32 }}>
+      <label style={uLabel}>{label}</label>
       <input
         type={type} placeholder={placeholder} value={value} required={required}
         onChange={e => onChange(e.target.value)}
-        style={fInput}
+        style={uInput}
       />
     </div>
   );
