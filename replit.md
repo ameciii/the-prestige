@@ -18,20 +18,28 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 ## LUMIÈRE Website
 
-A luxury event organizer (EO) website built as mockup-sandbox components. Brand: LUMIÈRE.
+A luxury event organizer (EO) website. Brand: LUMIÈRE. Live React + Vite artifact at `artifacts/lumiere`, preview path `/`.
 
-### Pages (in `artifacts/mockup-sandbox/src/components/mockups/lumiere/`)
-- `Home.tsx` — Landing page with hero, stats, about, services, portfolio preview, CTA
-- `Portfolio.tsx` — Full portfolio gallery with category filters (Wedding, Corporate, Private)
-- `Blog.tsx` — Journal page with featured article, category filters, article grid, newsletter
-- `Career.tsx` — Career page with job listings (accordion), values, Google Form CTA
-- `_group.css` — Shared design tokens: font (Nunito Sans ≈ Proxima Nova), colors, nav, footer
+### Pages (`artifacts/lumiere/src/pages/`)
+- `HomePage.tsx` — Full-bleed hero, stats bar, about section, services grid, portfolio preview, CTA banner
+- `PortfolioPage.tsx` — Masonry gallery with category filters (All, Wedding, Corporate, Private), 11 projects
+- `BlogPage.tsx` — Featured article hero, category filters, 6-article grid, newsletter signup
+- `CareerPage.tsx` — Company values, accordion job listings (5 openings), Google Forms CTA
+
+### Shared Components (`artifacts/lumiere/src/components/`)
+- `Nav.tsx` — Sticky, scroll-aware navbar with active link highlighting
+- `Footer.tsx` — 4-column dark footer
 
 ### Design Direction
-- White & light grey palette (`#f8f8f6`, `#f2f1ef`)
+- White & light grey palette (HSL: `0 0% 100%` / `40 20% 97%` / `40 20% 94%`)
+- Foreground dark: `hsl(35 10% 16%)`
 - Proxima Nova (via Nunito Sans Google Fonts alternative)
 - Minimalist luxury — clean typography, generous whitespace, editorial layout
-- Consistent nav + footer across all pages
+- Routing: Wouter with base `import.meta.env.BASE_URL`
+
+### Notes
+- Google Form URL placeholder in `CareerPage.tsx`: replace `YOUR_FORM_ID` with real Google Form ID
+- All imagery from Unsplash (royalty-free), no backend required
 
 ## Structure
 
