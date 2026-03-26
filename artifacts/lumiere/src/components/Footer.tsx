@@ -1,74 +1,126 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
 
 export function Footer() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
   return (
-    <footer style={{
-      background: 'hsl(35 10% 16%)',
-      color: 'hsl(40 20% 97%)',
-      padding: '80px 60px 40px',
-    }}>
+    <footer style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+      {/* Top columns */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '2fr 1fr 1fr',
-        gap: '60px',
-        marginBottom: '60px',
-        borderBottom: '1px solid rgba(255,255,255,0.1)',
-        paddingBottom: '60px',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        padding: '60px 40px 50px',
+        borderBottom: '1px solid rgba(0,0,0,0.08)',
+        gap: 40,
       }}>
         <div>
-          <div style={{ fontSize: 20, fontWeight: 300, letterSpacing: '0.38em', textTransform: 'uppercase', marginBottom: 18 }}>
-            LUMI<span style={{ fontWeight: 700 }}>È</span>RE
+          <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 28, color: 'hsl(35 10% 14%)' }}>
+            LUMIÈRE
           </div>
-          <p style={{ fontSize: 13, lineHeight: 1.85, color: 'rgba(255,255,255,0.48)', maxWidth: 280, margin: 0 }}>
+          <p style={{ fontSize: 12, lineHeight: 1.9, color: 'rgba(0,0,0,0.44)', margin: 0, maxWidth: 220 }}>
             A boutique event production house creating extraordinary experiences for discerning clients worldwide.
           </p>
         </div>
-        <FooterCol title="Services" links={[
+        <FooterCol title="Services" items={[
           { label: 'Wedding Events', href: '/portfolio' },
           { label: 'Corporate Events', href: '/portfolio' },
           { label: 'Private Events', href: '/portfolio' },
           { label: 'Destination Events', href: '/portfolio' },
         ]} />
-        <FooterCol title="Contact" links={[
-          { label: 'hello@lumiere-events.com', href: 'mailto:hello@lumiere-events.com', external: true },
-          { label: '+62 21 5050 1234', href: 'tel:+622150501234', external: true },
-          { label: 'Instagram', href: '#', external: true },
-          { label: 'LinkedIn', href: '#', external: true },
+        <FooterCol title="Social Media" items={[
+          { label: 'Instagram', href: '#', ext: true },
+          { label: 'LinkedIn', href: '#', ext: true },
+          { label: 'Pinterest', href: '#', ext: true },
+        ]} />
+        <FooterCol title="Contact" items={[
+          { label: 'hello@lumiere-events.com', href: 'mailto:hello@lumiere-events.com', ext: true },
+          { label: '+62 21 5050 1234', href: 'tel:+622150501234', ext: true },
+          { label: 'Jakarta, Indonesia', href: '#' },
         ]} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.05em' }}>
-          © 2025 LUMIÈRE Events. All rights reserved.
+
+      {/* Inline contact / form row */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '28px 40px',
+        borderBottom: '1px solid rgba(0,0,0,0.08)',
+        gap: 40,
+      }}>
+        <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)', flexShrink: 0 }}>
+          CONTACT
         </span>
-        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.05em' }}>
-          Privacy Policy · Terms
+        <input
+          type="text"
+          placeholder="NAME"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          style={{
+            flex: 1, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)',
+            padding: '8px 0', fontSize: 11, letterSpacing: '0.18em',
+            outline: 'none', background: 'transparent', fontFamily: "'Nunito Sans', sans-serif",
+            color: 'hsl(35 10% 14%)', textTransform: 'uppercase',
+          }}
+        />
+        <input
+          type="email"
+          placeholder="EMAIL"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          style={{
+            flex: 1, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)',
+            padding: '8px 0', fontSize: 11, letterSpacing: '0.18em',
+            outline: 'none', background: 'transparent', fontFamily: "'Nunito Sans', sans-serif",
+            color: 'hsl(35 10% 14%)', textTransform: 'uppercase',
+          }}
+        />
+        <button
+          onClick={() => { if (name && email) { alert('Thank you! We\'ll be in touch.'); setName(''); setEmail(''); } }}
+          style={{
+            fontFamily: "'Nunito Sans', sans-serif",
+            fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
+            padding: '10px 22px', background: 'hsl(35 10% 14%)', color: '#fff',
+            border: 'none', cursor: 'pointer', flexShrink: 0,
+          }}
+        >
+          Send →
+        </button>
+      </div>
+
+      {/* Bottom bar */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 40px' }}>
+        <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
+          © 2025 LUMIÈRE. All Rights Reserved.
+        </span>
+        <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
+          Privacy Policy
         </span>
       </div>
     </footer>
   );
 }
 
-function FooterCol({ title, links }: {
-  title: string;
-  links: { label: string; href: string; external?: boolean }[];
-}) {
+function FooterCol({ title, items }: { title: string; items: { label: string; href: string; ext?: boolean }[] }) {
   return (
     <div>
-      <h4 style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', marginBottom: 20, marginTop: 0 }}>
+      <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 20 }}>
         {title}
-      </h4>
+      </div>
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-        {links.map(l => (
-          <li key={l.label} style={{ marginBottom: 12 }}>
-            {l.external ? (
-              <a href={l.href} style={{ fontSize: 13, color: 'rgba(255,255,255,0.68)', textDecoration: 'none' }}>
-                {l.label}
+        {items.map(item => (
+          <li key={item.label} style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            {item.ext ? (
+              <a href={item.href} style={{ fontSize: 11.5, color: 'rgba(0,0,0,0.62)', textDecoration: 'none', letterSpacing: '0.04em' }}>
+                {item.label}
               </a>
             ) : (
-              <Link href={l.href} style={{ fontSize: 13, color: 'rgba(255,255,255,0.68)', textDecoration: 'none' }}>
-                {l.label}
+              <Link href={item.href} style={{ fontSize: 11.5, color: 'rgba(0,0,0,0.62)', textDecoration: 'none', letterSpacing: '0.04em' }}>
+                {item.label}
               </Link>
             )}
+            <span style={{ color: 'rgba(0,0,0,0.3)', fontSize: 11 }}>→</span>
           </li>
         ))}
       </ul>

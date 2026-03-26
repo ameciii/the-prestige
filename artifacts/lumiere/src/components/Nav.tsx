@@ -1,24 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 
-const LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'Portfolio', href: '/portfolio' },
-];
-
 interface NavProps {
   onContactClick?: () => void;
+  transparent?: boolean;
 }
 
-export function Nav({ onContactClick }: NavProps) {
+export function Nav({ onContactClick, transparent = false }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
 
   useEffect(() => {
-    const handle = () => setScrolled(window.scrollY > 20);
+    const handle = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handle);
     return () => window.removeEventListener('scroll', handle);
   }, []);
+
+  const isLight = transparent && !scrolled;
 
   const handleContact = () => {
     if (onContactClick) {
@@ -30,22 +28,69 @@ export function Nav({ onContactClick }: NavProps) {
   };
 
   return (
-    <nav className={`lm-nav ${scrolled ? 'scrolled' : ''}`}>
-      <Link href="/" className="lm-logo">
-        LUMI<span style={{ fontWeight: 700 }}>È</span>RE
+    <nav style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: '22px 40px',
+      background: isLight ? 'transparent' : 'rgba(255,255,255,0.97)',
+      backdropFilter: isLight ? 'none' : 'blur(12px)',
+      borderBottom: isLight ? 'none' : `1px solid ${scrolled ? 'rgba(0,0,0,0.08)' : 'transparent'}`,
+      transition: 'background 0.35s, border-color 0.35s',
+    }}>
+      {/* LOGO */}
+      <Link href="/" style={{
+        fontFamily: "'Nunito Sans', sans-serif",
+        fontSize: 17,
+        fontWeight: 800,
+        letterSpacing: '0.28em',
+        textTransform: 'uppercase',
+        color: isLight ? '#fff' : 'hsl(35 10% 14%)',
+        textDecoration: 'none',
+        transition: 'color 0.3s',
+      }}>
+        LUMIÈRE
       </Link>
-      <ul className="lm-nav-links">
-        {LINKS.map(l => (
-          <li key={l.label}>
-            <Link href={l.href} className={location === l.href ? 'active' : ''}>
+
+      {/* LINKS */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        {[
+          { label: 'Home', href: '/' },
+          { label: 'Portfolio', href: '/portfolio' },
+        ].map(l => {
+          const active = location === l.href;
+          return (
+            <Link key={l.label} href={l.href} style={{
+              fontFamily: "'Nunito Sans', sans-serif",
+              fontSize: 9.5,
+              fontWeight: 700,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: isLight ? (active ? '#fff' : 'rgba(255,255,255,0.65)') : (active ? 'hsl(35 10% 14%)' : 'hsl(35 5% 52%)'),
+              textDecoration: 'none',
+              padding: '6px 14px',
+              border: `1px solid ${isLight ? (active ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.22)') : (active ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.14)')}`,
+              transition: 'all 0.2s',
+            }}>
               {l.label}
             </Link>
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleContact} className="lm-btn lm-btn-dark" style={{ padding: '10px 22px', fontSize: '10px' }}>
-        Get In Touch
-      </button>
+          );
+        })}
+        <button onClick={handleContact} style={{
+          fontFamily: "'Nunito Sans', sans-serif",
+          fontSize: 9.5,
+          fontWeight: 700,
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: isLight ? 'rgba(255,255,255,0.65)' : 'hsl(35 5% 52%)',
+          background: 'none',
+          padding: '6px 14px',
+          border: `1px solid ${isLight ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.14)'}`,
+          cursor: 'pointer',
+          transition: 'all 0.2s',
+        }}>
+          Contact
+        </button>
+      </div>
     </nav>
   );
 }
