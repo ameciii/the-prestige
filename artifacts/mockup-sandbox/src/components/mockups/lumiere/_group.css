@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+:root {
+  --font-proxima: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --color-white: #ffffff;
+  --color-off-white: #f8f8f6;
+  --color-light-grey: #f2f1ef;
+  --color-mid-grey: #e5e4e0;
+  --color-text-light: #9a9690;
+  --color-text-mid: #6b6763;
+  --color-text-dark: #2a2825;
+  --color-accent: #1a1815;
+}
+
+.lumiere-root * {
+  font-family: var(--font-proxima);
+  box-sizing: border-box;
+}
+
+.lumiere-root {
+  background: var(--color-white);
+  color: var(--color-text-dark);
+  min-height: 100vh;
+}
+
+.lumiere-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 60px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+}
+
+.lumiere-nav.scrolled {
+  border-bottom-color: var(--color-mid-grey);
+}
+
+.lumiere-logo {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  text-decoration: none;
+}
+
+.lumiere-logo span {
+  font-weight: 600;
+}
+
+.lumiere-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lumiere-nav-links a {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lumiere-nav-links a:hover,
+.lumiere-nav-links a.active {
+  color: var(--color-text-dark);
+}
+
+.lumiere-footer {
+  background: var(--color-text-dark);
+  color: var(--color-off-white);
+  padding: 80px 60px 40px;
+}
+
+.lumiere-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 60px;
+}
+
+.lumiere-footer-brand {
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.lumiere-footer-desc {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.5);
+  max-width: 280px;
+}
+
+.lumiere-footer-col h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 20px;
+}
+
+.lumiere-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lumiere-footer-col li {
+  margin-bottom: 12px;
+}
+
+.lumiere-footer-col a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lumiere-footer-col a:hover {
+  color: #fff;
+}
+
+.lumiere-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lumiere-footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.05em;
+}
+
+.lumiere-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-proxima);
+}
+
+.lumiere-btn-dark {
+  background: var(--color-text-dark);
+  color: #fff;
+}
+
+.lumiere-btn-dark:hover {
+  background: #3d3a36;
+}
+
+.lumiere-btn-outline {
+  background: transparent;
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-text-dark);
+}
+
+.lumiere-btn-outline:hover {
+  background: var(--color-text-dark);
+  color: #fff;
+}
+
+.lumiere-btn-outline-white {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.lumiere-btn-outline-white:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+
+.arrow-link:hover {
+  gap: 18px;
+}
+
+.arrow-link::after {
+  content: '→';
+  font-size: 14px;
+}

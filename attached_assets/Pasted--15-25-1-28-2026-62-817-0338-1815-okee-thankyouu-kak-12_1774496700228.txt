@@ -1,0 +1,109 @@
+[15:25, 1/28/2026] +62 817-0338-1815: okee thankyouu kak
+
+[12:13, 2/5/2026] Ame: Selamat siang ko, ce.
+
+berikut ada beberapa pilihan template yang bisa dipertimbangkan.
+
+Mohon dibantu diinformasikan ya, prefer yang mana dari ko/ce.
+
+Thankyouu 
+
+https://forbetterweb.com/html/universal/indexslider.html     
+
+https://preview.hasthemes.com/miami/index-2.html     
+
+https://html5.seatheme.net/arnold/index.html     
+
+[12:17, 2/5/2026] +62 817-0338-1815: halo kak, thankyou updatenya, apa ada template yang lebih mendekati ke moodboard yaa kak? 😁
+
+[12:18, 2/5/2026] +62 817-0338-1815: mau yang lebih minimalist, simple, tapi kelihatan mahal gitu si kak
+
+[12:19, 2/5/2026] +62 817-0338-1815: Selamat siang ko, ce.
+
+berikut ada beberapa pilihan template yang bisa dipertimbangkan.
+
+Mohon dibantu diinformasikan ya, prefer yang mana dari ko/ce.
+
+Thankyouu 
+
+https://forbetterweb.com/html/universal/indexslider.html     
+
+https://preview.hasthemes.com/miami/index-2.html     
+
+https://html5.seatheme.net/arnold/index.html     
+
+soalnya yg dari fonny cek ini terlalu corporate, konvensional gitu kak
+
+[12:19, 2/5/2026] +62 817-0338-1815: kalau ada better option mungkin boleh dibantu share yaa ka
+
+Meeting Notes 
+
+Purpose:
+
+Membuat company profile website untuk Prestige (EO) yang berfokus pada pasar internasional. Website akan berfungsi sebagai media profil, blog, dan galeri event (foto-foto dikategorikan berdasarkan jenis event).
+
+Company Overview
+
+Event Organizer (EO)
+
+80% untuk wedding events
+
+Style Preference https://poetyque.com/     
+
+Target Market International (worldwide service)
+
+Website Goals
+
+Membangun profil profesional untuk pasar internasional
+
+Menampilkan portofolio event
+
+Menyediakan blog dan update kegiatan
+
+Menyediakan halaman karir untuk calon tim
+
+Mengarahkan semua klien agar mengisi form melalui website
+
+Website Structure
+
+Landing Page / Company Profile (One-page layout)
+
+Deskripsi singkat perusahaan
+
+Highlight layanan dan keunggulan
+
+Portofolio (dengan tombol “See More”)
+
+CTA menuju kontak atau form
+
+Portfolio Section
+
+Layout seperti Project Arts (hanya kontennya disesuaikan dengan Prestige)
+
+Banyak foto, dibagi per kategori event
+
+Blog Pages
+
+Berisi artikel, dokumentasi, atau liputan event
+
+Career Page
+
+Tautan ke Google Sheet untuk form lamaran
+
+Design Direction
+
+Color Palette: Putih dan abu-abu muda (light grey)
+
+buatin  aku template html atau tailwind yang sesuai dengan kemauan client
+
+Apakah mereka menginginkan template yang sudah jadi (pre-made) atau bersedia menggunakan template yang bisa disesuaikan (customizable)? bisa 2 2 nya
+
+Apakah mereka punya preferensi untuk menggunakan Tailwind CSS atau HTML biasa? bisa semuanya prefer tailwind
+
+Apakah mereka ingin template yang sudah termasuk halaman blog dan galeri, atau Anda akan membuatnya secara terpisah? klo bisa include ya gapapa
+
+Apakah mereka ingin template yang sudah mendukung multi-bahasa (untuk pasar internasional)? klo bisa iya
+
+https://dribbble.com/shots/25570147-FH-Real-Estate-Interior-Designer-Portfolio-Minimalist-Website   clientnya ngasih referens itu sih tapi itu bukan template cuma desainnya aja jadi mau vibesnya white, clean, luxury gitu mau yang lebih minimalist, simple, tapi kelihatan mahal , dari templatenta yg penting stylenya klo fiturnya kan nnti aku bisa customize sendiri
+
+buatin aku template yg sesuai

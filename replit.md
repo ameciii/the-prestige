@@ -16,6 +16,23 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## LUMIÈRE Website
+
+A luxury event organizer (EO) website built as mockup-sandbox components. Brand: LUMIÈRE.
+
+### Pages (in `artifacts/mockup-sandbox/src/components/mockups/lumiere/`)
+- `Home.tsx` — Landing page with hero, stats, about, services, portfolio preview, CTA
+- `Portfolio.tsx` — Full portfolio gallery with category filters (Wedding, Corporate, Private)
+- `Blog.tsx` — Journal page with featured article, category filters, article grid, newsletter
+- `Career.tsx` — Career page with job listings (accordion), values, Google Form CTA
+- `_group.css` — Shared design tokens: font (Nunito Sans ≈ Proxima Nova), colors, nav, footer
+
+### Design Direction
+- White & light grey palette (`#f8f8f6`, `#f2f1ef`)
+- Proxima Nova (via Nunito Sans Google Fonts alternative)
+- Minimalist luxury — clean typography, generous whitespace, editorial layout
+- Consistent nav + footer across all pages
+
 ## Structure
 
 ```text
