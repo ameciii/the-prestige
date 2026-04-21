@@ -1,89 +1,48 @@
-import { useState } from 'react';
 import { Link } from 'wouter';
 
 export function Footer() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
   return (
     <footer style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-      {/* Top columns */}
       <div className="lm-grid-footer lm-pad-h" style={{ paddingTop: 60, paddingBottom: 50, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: 28, color: 'hsl(35 10% 14%)' }}>
+          <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 6, color: 'hsl(35 10% 14%)' }}>
             LUMIÈRE
           </div>
-          <p style={{ fontSize: 12, lineHeight: 1.9, color: 'rgba(0,0,0,0.44)', margin: 0, maxWidth: 220 }}>
-            A boutique event production house creating extraordinary experiences for discerning clients worldwide.
+          <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 22 }}>
+            Event Organizer
+          </div>
+          <p style={{ fontSize: 12, lineHeight: 1.9, color: 'rgba(0,0,0,0.44)', margin: '0 0 28px', maxWidth: 210 }}>
+            Luxury event organizer crafting timeless moments for discerning clients around the world.
           </p>
+          <div style={{ display: 'flex', gap: 14 }}>
+            <a href="#" aria-label="Instagram" style={{ width: 34, height: 34, border: '1px solid rgba(0,0,0,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'hsl(35 10% 14%)', fontSize: 14 }}>
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="tel:+622150501234" aria-label="Phone" style={{ width: 34, height: 34, border: '1px solid rgba(0,0,0,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: 'hsl(35 10% 14%)', fontSize: 14 }}>
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </a>
+          </div>
         </div>
-        <FooterCol title="Services" items={[
-          { label: 'Wedding Events', href: '/portfolio' },
-          { label: 'Corporate Events', href: '/portfolio' },
-          { label: 'Private Events', href: '/portfolio' },
-          { label: 'Destination Events', href: '/portfolio' },
+        <FooterCol title="Navigation" items={[
+          { label: 'Home', href: '/' },
+          { label: 'About Us', href: '/' },
+          { label: 'Our Services', href: '/' },
+          { label: 'Project Showcase', href: '/portfolio' },
+          { label: 'Testimonial', href: '/' },
         ]} />
-        <FooterCol title="Social Media" items={[
+        <FooterCol title="Connect With Us" items={[
           { label: 'Instagram', href: '#', ext: true },
-          { label: 'LinkedIn', href: '#', ext: true },
-          { label: 'Pinterest', href: '#', ext: true },
-        ]} />
-        <FooterCol title="Contact" items={[
-          { label: 'hello@lumiere-events.com', href: 'mailto:hello@lumiere-events.com', ext: true },
-          { label: '+62 21 5050 1234', href: 'tel:+622150501234', ext: true },
-          { label: 'Jakarta, Indonesia', href: '#' },
+          { label: 'Inquire Here', href: '/#contact', ext: true },
+          { label: 'Job & Career', href: '#', ext: true },
         ]} />
       </div>
 
-      {/* Inline contact / form row */}
-      <div className="lm-footer-row lm-pad-h" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-        <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)', flexShrink: 0 }}>
-          CONTACT
-        </span>
-        <input
-          type="text"
-          placeholder="NAME"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          style={{
-            flex: 1, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)',
-            padding: '8px 0', fontSize: 11, letterSpacing: '0.18em',
-            outline: 'none', background: 'transparent', fontFamily: "'Nunito Sans', sans-serif",
-            color: 'hsl(35 10% 14%)', textTransform: 'uppercase',
-          }}
-        />
-        <input
-          type="email"
-          placeholder="EMAIL"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          style={{
-            flex: 1, border: 'none', borderBottom: '1px solid rgba(0,0,0,0.12)',
-            padding: '8px 0', fontSize: 11, letterSpacing: '0.18em',
-            outline: 'none', background: 'transparent', fontFamily: "'Nunito Sans', sans-serif",
-            color: 'hsl(35 10% 14%)', textTransform: 'uppercase',
-          }}
-        />
-        <button
-          onClick={() => { if (name && email) { alert('Thank you! We\'ll be in touch.'); setName(''); setEmail(''); } }}
-          style={{
-            fontFamily: "'Nunito Sans', sans-serif",
-            fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
-            padding: '10px 22px', background: 'hsl(35 10% 14%)', color: '#fff',
-            border: 'none', cursor: 'pointer', flexShrink: 0,
-          }}
-        >
-          Send →
-        </button>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="lm-pad-h" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 20 }}>
+      <div className="lm-pad-h" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 20, flexWrap: 'wrap', gap: 8 }}>
         <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
-          © 2025 LUMIÈRE. All Rights Reserved.
+          © 2026 LUMIÈRE. All Rights Reserved.
         </span>
-        <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
-          Privacy Policy
+        <span style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
+          Jakarta · Surabaya · Bali · Serving Worldwide
         </span>
       </div>
     </footer>
@@ -98,17 +57,16 @@ function FooterCol({ title, items }: { title: string; items: { label: string; hr
       </div>
       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         {items.map(item => (
-          <li key={item.label} style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <li key={item.label} style={{ marginBottom: 12 }}>
             {item.ext ? (
-              <a href={item.href} style={{ fontSize: 11.5, color: 'rgba(0,0,0,0.62)', textDecoration: 'none', letterSpacing: '0.04em' }}>
+              <a href={item.href} style={{ fontSize: 12, color: 'rgba(0,0,0,0.6)', textDecoration: 'none', letterSpacing: '0.02em' }}>
                 {item.label}
               </a>
             ) : (
-              <Link href={item.href} style={{ fontSize: 11.5, color: 'rgba(0,0,0,0.62)', textDecoration: 'none', letterSpacing: '0.04em' }}>
+              <Link href={item.href} style={{ fontSize: 12, color: 'rgba(0,0,0,0.6)', textDecoration: 'none', letterSpacing: '0.02em' }}>
                 {item.label}
               </Link>
             )}
-            <span style={{ color: 'rgba(0,0,0,0.3)', fontSize: 11 }}>→</span>
           </li>
         ))}
       </ul>

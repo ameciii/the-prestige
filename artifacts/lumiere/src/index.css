@@ -272,7 +272,7 @@
 .lm-grid-2asym { display: grid; grid-template-columns: 55% 45%; min-height: 560px; }
 .lm-grid-form  { display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: flex-start; }
 .lm-grid-svc   { display: grid; grid-template-columns: 1fr 1fr; }
-.lm-grid-footer{ display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; }
+.lm-grid-footer{ display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
 
 /* Row helpers */
 .lm-intro-hdr  { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; }
@@ -324,6 +324,11 @@
   .lm-svc-item { border-right: none !important; padding-left: 0 !important; padding-right: 0 !important; }
 
   .lm-about-text { padding: 40px 24px !important; }
+  .lm-about-stats { padding: 16px 20px !important; gap: 20px !important; }
+
+  .lm-showcase-top { grid-template-columns: 1fr !important; }
+  .lm-showcase-bottom { grid-template-columns: 1fr 1fr !important; }
+  .lm-showcase-nav { flex-direction: column !important; align-items: flex-start !important; gap: 20px !important; }
 
   .lm-portfolio-section { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; }
 

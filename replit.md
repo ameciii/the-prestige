@@ -21,21 +21,23 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 A luxury event organizer (EO) website. Brand: LUMIÈRE. Live React + Vite artifact at `artifacts/lumiere`, preview path `/`.
 
 ### Pages (`artifacts/lumiere/src/pages/`)
-- `HomePage.tsx` — Full-bleed hero, stats bar, about section, services grid, portfolio preview, CTA banner
-- `PortfolioPage.tsx` — Masonry gallery with category filters (All, Wedding, Corporate, Private), 11 projects
-- `BlogPage.tsx` — Featured article hero, category filters, 6-article grid, newsletter signup
-- `CareerPage.tsx` — Company values, accordion job listings (5 openings), Google Forms CTA
+- `HomePage.tsx` — Full-bleed hero, About (text+stats), Services (numbered/cream bg), Project Showcase (masonry grid), Testimonials, Contact form (Groom/Bride fields)
+- `PortfolioPage.tsx` — Filterable gallery (All, Wedding, Corporate, Private), 11 projects, masonry-style single column on mobile
 
 ### Shared Components (`artifacts/lumiere/src/components/`)
-- `Nav.tsx` — Sticky, scroll-aware navbar with active link highlighting
-- `Footer.tsx` — 4-column dark footer
+- `Nav.tsx` — Transparent hero overlay, bordered pill links, hamburger menu on mobile
+- `Footer.tsx` — 3-column: Logo+socials, Navigation, Connect With Us
 
-### Design Direction
-- White & light grey palette (HSL: `0 0% 100%` / `40 20% 97%` / `40 20% 94%`)
-- Foreground dark: `hsl(35 10% 16%)`
-- Proxima Nova (via Nunito Sans Google Fonts alternative)
-- Minimalist luxury — clean typography, generous whitespace, editorial layout
-- Routing: Wouter with base `import.meta.env.BASE_URL`
+### Design Direction (The Prestige template)
+- Cream `#F4F2ED` services background, `#FAF9F7` testimonials background, white body
+- Foreground dark: `hsl(35 10% 14%)`
+- Nunito Sans (Google Fonts)
+- Bold (800 weight) uppercase section headings + lowercase section labels ("about", "what we do", "our work", "what they say", "let's connect")
+- Masonry Project Showcase: top row 55/45 split + bottom 3-equal-col
+- Services: numbered 01–06, paragraph descriptions, 2-col grid
+- Testimonials: 3-col portrait photos + couple names + italic quotes
+- Contact form: Groom To Be, Bride To Be, Contact, Email, Event Date, City & Country, Your Vision
+- Routing: Wouter, base `/`
 
 ### Notes
 - Google Form URL placeholder in `CareerPage.tsx`: replace `YOUR_FORM_ID` with real Google Form ID
