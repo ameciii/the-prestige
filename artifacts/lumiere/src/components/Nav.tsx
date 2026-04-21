@@ -36,70 +36,98 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
 
   const navLinks = [
     { label: 'Home', href: '/' },
-    { label: 'Portfolio', href: '/portfolio' },
+    { label: 'About Us', href: '/#about' },
+    { label: 'Our Services', href: '/#services' },
+    { label: 'Project Showcase', href: '/#portfolio' },
+    { label: 'Testimonial', href: '/#testimonial' },
   ];
+
+  const linkColor = isLight ? 'rgba(255,255,255,0.82)' : 'hsl(35 5% 42%)';
+  const activeLinkColor = isLight ? '#fff' : 'hsl(35 10% 14%)';
 
   return (
     <>
-      <nav className="lm-pad-h" style={{
+      <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        paddingTop: 22, paddingBottom: 22,
+        display: 'flex', alignItems: 'center',
+        paddingTop: 18, paddingBottom: 18,
+        paddingLeft: 36, paddingRight: 36,
         background: isLight ? 'transparent' : 'rgba(255,255,255,0.97)',
         backdropFilter: isLight ? 'none' : 'blur(12px)',
         borderBottom: isLight ? 'none' : `1px solid ${scrolled ? 'rgba(0,0,0,0.08)' : 'transparent'}`,
         transition: 'background 0.35s, border-color 0.35s',
       }}>
-        {/* LOGO */}
+        {/* LOGO — left */}
         <Link href="/" onClick={() => setMenuOpen(false)} style={{
-          fontFamily: "'Nunito Sans', sans-serif",
-          fontSize: 17,
-          fontWeight: 800,
-          letterSpacing: '0.28em',
-          textTransform: 'uppercase',
-          color: isLight ? '#fff' : 'hsl(35 10% 14%)',
-          textDecoration: 'none',
-          transition: 'color 0.3s',
-          zIndex: 101,
+          textDecoration: 'none', zIndex: 101, flex: '0 0 auto',
+          lineHeight: 1,
         }}>
-          LUMIÈRE
+          <div style={{
+            fontFamily: "'Nunito Sans', sans-serif",
+            fontSize: 14, fontWeight: 800, letterSpacing: '0.26em',
+            textTransform: 'uppercase',
+            color: isLight ? '#fff' : 'hsl(35 10% 14%)',
+            transition: 'color 0.3s',
+          }}>
+            LUMIÈRE
+          </div>
+          <div style={{
+            fontFamily: "'Nunito Sans', sans-serif",
+            fontSize: 7.5, fontWeight: 600, letterSpacing: '0.28em',
+            textTransform: 'uppercase',
+            color: isLight ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.35)',
+            marginTop: 3, transition: 'color 0.3s',
+          }}>
+            Event Organizer
+          </div>
         </Link>
 
-        {/* DESKTOP LINKS */}
-        <div className="lm-nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        {/* CENTERED LINKS — desktop only */}
+        <div className="lm-nav-links-desktop" style={{
+          position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', alignItems: 'center', gap: 28,
+        }}>
           {navLinks.map(l => {
-            const active = location === l.href;
+            const active = location === l.href || (l.href === '/' && location === '/');
             return (
-              <Link key={l.label} href={l.href} style={{
+              <a key={l.label} href={l.href} onClick={e => {
+                if (l.href.includes('#')) {
+                  e.preventDefault();
+                  const id = l.href.split('#')[1];
+                  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }} style={{
                 fontFamily: "'Nunito Sans', sans-serif",
-                fontSize: 9.5,
-                fontWeight: 700,
-                letterSpacing: '0.2em',
+                fontSize: 9, fontWeight: 700, letterSpacing: '0.18em',
                 textTransform: 'uppercase',
-                color: isLight ? (active ? '#fff' : 'rgba(255,255,255,0.65)') : (active ? 'hsl(35 10% 14%)' : 'hsl(35 5% 52%)'),
-                textDecoration: 'none',
-                padding: '6px 14px',
-                border: `1px solid ${isLight ? (active ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.22)') : (active ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.14)')}`,
-                transition: 'all 0.2s',
+                color: active ? activeLinkColor : linkColor,
+                textDecoration: active ? 'underline' : 'none',
+                textUnderlineOffset: 4,
+                textDecorationColor: 'currentColor',
+                transition: 'color 0.2s',
+                whiteSpace: 'nowrap',
               }}>
                 {l.label}
-              </Link>
+              </a>
             );
           })}
+        </div>
+
+        {/* INQUIRE NOW — right */}
+        <div className="lm-nav-links-desktop" style={{ marginLeft: 'auto', flex: '0 0 auto' }}>
           <button onClick={handleContact} style={{
             fontFamily: "'Nunito Sans', sans-serif",
-            fontSize: 9.5,
-            fontWeight: 700,
-            letterSpacing: '0.2em',
+            fontSize: 9, fontWeight: 700, letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: isLight ? 'rgba(255,255,255,0.65)' : 'hsl(35 5% 52%)',
+            color: isLight ? '#fff' : 'hsl(35 10% 14%)',
             background: 'none',
-            padding: '6px 14px',
-            border: `1px solid ${isLight ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.14)'}`,
+            padding: '7px 18px',
+            border: `1px solid ${isLight ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.3)'}`,
             cursor: 'pointer',
             transition: 'all 0.2s',
+            whiteSpace: 'nowrap',
           }}>
-            Contact
+            Inquire Now
           </button>
         </div>
 
@@ -110,7 +138,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
           style={{
             display: 'none',
             background: 'none', border: 'none', cursor: 'pointer',
-            padding: 8, zIndex: 101,
+            padding: 8, zIndex: 101, marginLeft: 'auto',
           }}
           className="lm-hamburger"
         >
@@ -132,30 +160,39 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
       {/* MOBILE MENU OVERLAY */}
       <div className={`lm-mobile-menu${menuOpen ? ' open' : ''}`}>
         {navLinks.map(l => (
-          <Link
+          <a
             key={l.label}
             href={l.href}
-            onClick={() => setMenuOpen(false)}
+            onClick={e => {
+              setMenuOpen(false);
+              if (l.href.includes('#')) {
+                e.preventDefault();
+                setTimeout(() => {
+                  const id = l.href.split('#')[1];
+                  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+              }
+            }}
             style={{
               fontFamily: "'Nunito Sans', sans-serif",
-              fontSize: 28, fontWeight: 200, letterSpacing: '0.18em',
+              fontSize: 26, fontWeight: 200, letterSpacing: '0.18em',
               textTransform: 'uppercase', color: 'hsl(35 10% 14%)',
               textDecoration: 'none',
             }}
           >
             {l.label}
-          </Link>
+          </a>
         ))}
         <button
           onClick={handleContact}
           style={{
             fontFamily: "'Nunito Sans', sans-serif",
-            fontSize: 28, fontWeight: 200, letterSpacing: '0.18em',
+            fontSize: 26, fontWeight: 200, letterSpacing: '0.18em',
             textTransform: 'uppercase', color: 'hsl(35 10% 14%)',
             background: 'none', border: 'none', cursor: 'pointer',
           }}
         >
-          Contact
+          Inquire Now
         </button>
         <div style={{ width: '100%', height: 1, background: 'rgba(0,0,0,0.08)', margin: '8px 0' }} />
         <div style={{ fontSize: 10, letterSpacing: '0.2em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>

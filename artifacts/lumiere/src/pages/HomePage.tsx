@@ -66,57 +66,60 @@ export default function HomePage() {
       <Nav onContactClick={scrollToContact} transparent />
 
       {/* ══ 1. HERO — FULL BLEED ════════════════════════════════════ */}
-      <section style={{ position: 'relative', width: '100%', height: '100vh', minHeight: 640, overflow: 'hidden' }}>
+      <section style={{ position: 'relative', width: '100%', height: '100vh', minHeight: 600, overflow: 'hidden' }}>
         <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=90"
+          src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1920&q=90"
           alt="Hero"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block', filter: 'grayscale(100%)' }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.65) 100%)' }} />
-        <div className="lm-hero-text" style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 40px 44px', maxWidth: 640 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: 18, marginTop: 0, animation: 'lm-fade-in 0.8s ease 0.2s both' }}>
-            Creating A Story That Is Uniquely Yours.
-          </p>
-          <h1 style={{
-            fontSize: 'clamp(44px, 5.5vw, 72px)', fontWeight: 200, lineHeight: 1.06,
-            letterSpacing: '-0.01em', color: '#fff', margin: '0 0 32px',
-            animation: 'lm-fade-up 1s ease 0.35s both',
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)' }} />
+
+        <div className="lm-hero-text" style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 44px 48px', maxWidth: 560 }}>
+          <div style={{ animation: 'lm-fade-up 1s ease 0.2s both' }}>
+            <div style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontSize: 'clamp(64px, 8vw, 108px)',
+              fontWeight: 400,
+              color: '#fff',
+              lineHeight: 1.1,
+              marginBottom: 2,
+            }}>
+              Love Journey
+            </div>
+            <div style={{
+              fontFamily: "'Nunito Sans', sans-serif",
+              fontSize: 'clamp(13px, 1.3vw, 18px)',
+              fontWeight: 700,
+              letterSpacing: '0.32em',
+              textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.9)',
+              marginBottom: 20,
+            }}>
+              Begins Here...
+            </div>
+          </div>
+          <p style={{
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.6)', marginBottom: 28, marginTop: 0,
+            animation: 'lm-fade-in 0.8s ease 0.5s both',
           }}>
-            Love Journey<br /><em style={{ fontStyle: 'italic', fontWeight: 300 }}>Begins Here...</em>
-          </h1>
+            Creating A Story That Is<br />Uniquely Yours.
+          </p>
           <div style={{ animation: 'lm-fade-up 0.7s ease 0.65s both' }}>
             <button onClick={scrollToContact} style={{
               background: 'hsl(35 10% 14%)', color: '#fff',
-              border: 'none', padding: '14px 32px',
-              fontSize: 10, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase',
+              border: 'none', padding: '13px 30px',
+              fontSize: 9.5, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase',
               cursor: 'pointer', fontFamily: "'Nunito Sans', sans-serif",
             }}>
               Inquire Now
             </button>
           </div>
         </div>
-        <div className="lm-hero-thumbs">
-          {[
-            { title: 'The Tuscany Wedding', cat: 'Wedding', img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=400&q=85' },
-            { title: 'Azure Summit', cat: 'Corporate', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&q=85' },
-          ].map(t => (
-            <Link key={t.title} href="/portfolio" style={{ position: 'relative', display: 'block', width: 200, height: 160, overflow: 'hidden', flexShrink: 0, textDecoration: 'none' }}>
-              <img src={t.img} alt={t.title}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.4s ease' }}
-                onMouseEnter={ev => { ev.currentTarget.style.transform = 'scale(1.06)'; }}
-                onMouseLeave={ev => { ev.currentTarget.style.transform = 'scale(1)'; }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)', pointerEvents: 'none' }} />
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 12px', pointerEvents: 'none' }}>
-                <div style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', marginBottom: 3 }}>{t.cat}</div>
-                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.14em', color: '#fff', textTransform: 'uppercase' }}>{t.title}</div>
-              </div>
-            </Link>
-          ))}
-        </div>
       </section>
 
       {/* ══ 2. ABOUT — TEXT LEFT + IMAGE+STATS RIGHT ════════════════ */}
-      <Fade as="section" direction="in" className="lm-grid-2asym" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+      <Fade as="section" id="about" direction="in" className="lm-grid-2asym" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div className="lm-about-text" style={{ padding: '70px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
             <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 20 }}>
@@ -167,7 +170,7 @@ export default function HomePage() {
       </Fade>
 
       {/* ══ 3. SERVICES ════════════════════════════════════════════ */}
-      <section style={{ background: '#F4F2ED' }}>
+      <section id="services" style={{ background: '#F4F2ED' }}>
         <Fade className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70 }}>
           <div style={{ marginBottom: 50 }}>
             <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 16 }}>
@@ -252,7 +255,7 @@ export default function HomePage() {
       </section>
 
       {/* ══ 5. TESTIMONIALS ════════════════════════════════════════ */}
-      <section className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70, borderTop: '1px solid rgba(0,0,0,0.08)', background: '#FAF9F7' }}>
+      <section id="testimonial" className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70, borderTop: '1px solid rgba(0,0,0,0.08)', background: '#FAF9F7' }}>
         <Fade style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 44 }}>
           <div>
             <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 16 }}>
