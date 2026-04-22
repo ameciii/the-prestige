@@ -9,44 +9,44 @@ import { Fade } from '@/components/Fade';
 const SERVICES_LIST = [
   {
     num: '01', name: 'Engagement Ceremony',
-    desc: 'An engagement marks the beginning of a new chapter, symbolizing a shared commitment. We recognize the importance of honoring diverse cultural traditions and values.',
+    desc: 'An engagement marks the beginning of a new chapter, symbolizing a shared commitment and the first union of two families. We recognize the importance of honoring diverse cultural traditions and values.',
   },
   {
     num: '02', name: 'Wedding Reception',
-    desc: 'A wedding reception offers versatile elegance, from modern minimalism to lavish floral settings, with every detail designed to reflect your vision.',
+    desc: 'A ballroom wedding offers versatile elegance, from modern minimalism to lavish floral settings, with every detail designed to reflect your vision.',
   },
   {
-    num: '03', name: 'Destination Wedding — Bali',
-    desc: 'From golden sunsets by the sea to enchanting starlit evenings, nature becomes a breathtaking backdrop for your most special day.',
+    num: '03', name: 'Destination Wedding - Bali',
+    desc: 'For a more intimate and relaxed celebration, from golden sunsets by the sea to enchanting starlit evenings, nature becomes a breathtaking backdrop for your special day.',
   },
   {
     num: '04', name: 'Overseas Wedding Planner',
-    desc: 'Our full-service planning of your overseas wedding is flawlessly executed, from curated dining experiences to luxury accommodations. We design bespoke celebrations across the globe.',
+    desc: 'Our full-service planning of your overseas wedding is flawlessly executed from curated dining experiences to luxury accommodations. We design bespoke celebrations across the globe.',
   },
   {
-    num: '05', name: 'Anniversary & Birthday Party',
-    desc: 'Every anniversary and birthday is a meaningful milestone. Each celebration should reflect your unique vision and the life you have beautifully built together.',
+    num: '05', name: 'Anniversary / Birthday Party',
+    desc: 'Every anniversary / birthday is a meaningful milestone, and each celebration should reflect your unique vision.',
   },
   {
     num: '06', name: 'Corporate Events & Others',
-    desc: 'We provide a comprehensive range of corporate event management and creative services, from team building activities to large-scale corporate celebrations and galas.',
+    desc: 'We provide a comprehensive range of corporate event management and creative services. From team building activities to large scale corporate celebrations and gala events, each project is handled with innovation.',
   },
 ];
 
 const TESTIMONIALS = [
   {
     names: 'Daniel & Jessy',
-    img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=85',
-    quote: 'LUMIÈRE turned our dream into a breathtaking reality. Every detail was crafted with care and elegance.',
+    img: '/photos/testi-1.jpg',
+    quote: 'The Prestige turned our dream into a breathtaking reality. Every detail was crafted with care and elegance.',
   },
   {
     names: 'Rudy & Michelle',
-    img: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=700&q=85',
+    img: '/photos/testi-2.jpg',
     quote: 'From the first meeting to the last dance, the team was flawless. We will forever be grateful.',
   },
   {
     names: 'Wayne & Jeny',
-    img: 'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=700&q=85',
+    img: '/photos/testi-3.jpg',
     quote: 'A seamless, breathtaking experience from start to finish. Truly a world-class team.',
   },
 ];
@@ -68,7 +68,7 @@ export default function HomePage() {
       {/* ══ 1. HERO — FULL BLEED ════════════════════════════════════ */}
       <section style={{ position: 'relative', width: '100%', height: '100vh', minHeight: 600, overflow: 'hidden' }}>
         <img
-          src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1920&q=90"
+          src="/photos/hero.jpg"
           alt="Hero"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block', filter: 'grayscale(100%)' }}
         />
@@ -119,24 +119,26 @@ export default function HomePage() {
       </section>
 
       {/* ══ 2. ABOUT — TEXT LEFT + IMAGE+STATS RIGHT ════════════════ */}
-      <Fade as="section" id="about" direction="in" className="lm-grid-2asym" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+      <Fade as="section" id="about" direction="in" className="lm-grid-2asym" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)', minHeight: 560 }}>
         <div className="lm-about-text" style={{ padding: '70px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 20 }}>
-              about LUMIÈRE
+            <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span>about</span>
+              <span style={{ width: 1, height: 10, background: 'rgba(0,0,0,0.25)', display: 'inline-block', flexShrink: 0 }} />
+              <span style={{ fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10, color: 'rgba(0,0,0,0.5)' }}>THE PRESTIGE ORGANIZER</span>
             </div>
             <h2 style={{ fontSize: 'clamp(24px, 2.8vw, 38px)', fontWeight: 800, letterSpacing: '0.03em', textTransform: 'uppercase', margin: '0 0 24px', lineHeight: 1.2 }}>
               Beyond Planning,<br />We Create Meaning
             </h2>
             <p style={{ fontSize: 13.5, lineHeight: 1.9, color: 'rgba(0,0,0,0.55)', margin: '0 0 24px' }}>
-              We are a passionate team in the event industry, crafting unique celebrations of love inspired by each couple's story. We create detailed, seamless event plans that capture laughter, love, and emotion to be cherished forever.
+              We are a passionate team in the wedding industry, crafting unique Celebration of Love moments inspired by each couple's story. At The Prestige, we create detailed, seamless wedding plans that capture laughter, love, and emotion to be cherished forever.
             </p>
             <div style={{ marginTop: 28, marginBottom: 36, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
               <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 8 }}>
                 Our Team
               </div>
               <div style={{ fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.5)' }}>
-                Conceptor · Planner · Director
+                Conceptor | Planner | Director
               </div>
             </div>
           </div>
@@ -144,25 +146,28 @@ export default function HomePage() {
             background: 'none', border: 'none', cursor: 'pointer', padding: 0,
             fontSize: 10.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
             color: 'hsl(35 10% 14%)', fontFamily: "'Nunito Sans', sans-serif",
-            display: 'inline-flex', alignItems: 'center', gap: 16, alignSelf: 'flex-start',
+            display: 'inline-flex', alignItems: 'center', gap: 0, alignSelf: 'flex-start',
+            textDecoration: 'underline', textUnderlineOffset: 4,
           }}>
-            Know Us Better <span style={{ fontSize: 14 }}>→</span>
+            Know Us Better
           </button>
         </div>
-        <div style={{ position: 'relative', overflow: 'hidden', minHeight: 480 }}>
-          <img
-            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=88"
-            alt="LUMIÈRE team"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
-          <div className="lm-about-stats" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, display: 'flex', gap: 32, background: 'rgba(255,255,255,0.92)', padding: '20px 32px' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', color: 'hsl(35 10% 14%)', lineHeight: 1 }}>1000+</div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 1, overflow: 'hidden', minHeight: 400 }}>
+            <img
+              src="/photos/about-team.jpg"
+              alt="LUMIÈRE team"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
+            />
+          </div>
+          <div className="lm-about-stats" style={{ display: 'flex', gap: 0, background: '#fff', padding: '22px 36px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', color: 'hsl(35 10% 14%)', lineHeight: 1 }}>1000+</div>
               <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginTop: 6 }}>Events Crafted</div>
             </div>
-            <div style={{ width: 1, background: 'rgba(0,0,0,0.1)', alignSelf: 'stretch' }} />
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', color: 'hsl(35 10% 14%)', lineHeight: 1 }}>10+</div>
+            <div style={{ width: 1, background: 'rgba(0,0,0,0.1)', alignSelf: 'stretch', margin: '0 24px' }} />
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', color: 'hsl(35 10% 14%)', lineHeight: 1 }}>10+</div>
               <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginTop: 6 }}>Years of Love</div>
             </div>
           </div>
@@ -210,29 +215,29 @@ export default function HomePage() {
         </Fade>
 
         <Fade direction="in">
-          <div className="lm-showcase-top" style={{ display: 'grid', gridTemplateColumns: '55fr 45fr', gap: 3, marginBottom: 3 }}>
-            <div style={{ overflow: 'hidden' }}>
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=88" alt="Showcase 1"
-                style={{ width: '100%', height: '100%', minHeight: 420, objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
+          <div className="lm-showcase-top" style={{ display: 'grid', gridTemplateColumns: '55fr 45fr', gap: 3, marginBottom: 3, height: 440 }}>
+            <div style={{ overflow: 'hidden', height: '100%' }}>
+              <img src="/photos/showcase-1.jpg" alt="Showcase 1"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', display: 'block', transition: 'transform 0.5s ease' }}
                 onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
                 onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
             </div>
-            <div style={{ overflow: 'hidden' }}>
-              <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=700&q=88" alt="Showcase 2"
-                style={{ width: '100%', height: '100%', minHeight: 420, objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
+            <div style={{ overflow: 'hidden', height: '100%' }}>
+              <img src="/photos/showcase-2.jpg" alt="Showcase 2"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', transition: 'transform 0.5s ease' }}
                 onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
                 onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
             </div>
           </div>
           <div className="lm-showcase-bottom" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 3 }}>
             {[
-              'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=700&q=88',
-              'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=700&q=88',
-              'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=700&q=88',
+              '/photos/showcase-3.jpg',
+              '/photos/showcase-4.jpg',
+              '/photos/showcase-5.jpg',
             ].map((src, i) => (
               <div key={i} style={{ overflow: 'hidden' }}>
                 <img src={src} alt={`Showcase ${i + 3}`}
-                  style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
+                  style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', objectPosition: 'center', display: 'block', transition: 'transform 0.5s ease' }}
                   onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
                   onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
               </div>
@@ -240,17 +245,9 @@ export default function HomePage() {
           </div>
         </Fade>
 
-        <div className="lm-showcase-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 32 }}>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <button aria-label="Previous" style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)' }}>‹</button>
-            <button aria-label="Next" style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)' }}>›</button>
-          </div>
-          <Link href="/portfolio" style={{
-            fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: 'hsl(35 10% 14%)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10,
-          }}>
-            View Full Portfolio →
-          </Link>
+        <div className="lm-showcase-nav" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 32, gap: 10 }}>
+          <button aria-label="Previous" style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)' }}>‹</button>
+          <button aria-label="Next" style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)' }}>›</button>
         </div>
       </section>
 
@@ -278,7 +275,7 @@ export default function HomePage() {
             <Fade key={t.names} delay={i * 0.1}>
               <div style={{ overflow: 'hidden' }}>
                 <img src={t.img} alt={t.names}
-                  style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block', filter: 'grayscale(10%)' }} />
+                  style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
               </div>
               <div style={{ paddingTop: 18, paddingBottom: 28, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 10 }}>{t.names}</div>
@@ -300,18 +297,13 @@ export default function HomePage() {
               Love Journey<br />Begins Here...
             </h2>
             <p style={{ fontSize: 13, lineHeight: 1.85, color: 'rgba(0,0,0,0.5)', margin: '0 0 44px', maxWidth: 320 }}>
-              Every extraordinary event begins with a conversation. We invite you to share your vision and allow our dedicated team to transform it into an unforgettable experience.
+              Every extraordinary event begins with a conversation. We invite you to share your vision with us, and allow our dedicated team to transform it into an unforgettable experience.
             </p>
-            {[
-              { label: 'Email', val: 'hello@lumiere-events.com' },
-              { label: 'Phone', val: '+62 21 5050 1234' },
-              { label: 'Location', val: 'Jakarta · Surabaya · Bali\nServing Worldwide' },
-            ].map((c, i) => (
-              <div key={c.label} style={{ paddingBottom: 18, marginBottom: 18, borderBottom: i < 2 ? '1px solid rgba(0,0,0,0.07)' : 'none' }}>
-                <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.28)', marginBottom: 6 }}>{c.label}</div>
-                <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', whiteSpace: 'pre-line' }}>{c.val}</div>
-              </div>
-            ))}
+            <div style={{ marginTop: 8 }}>
+              <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', marginBottom: 10 }}>ThePrestigeOrganizer@gmail.com</div>
+              <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', marginBottom: 10 }}>+62 811 3566 299</div>
+              <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', lineHeight: 1.7 }}>Jakarta | Surabaya | Bali<br />Serving Worldwide</div>
+            </div>
           </div>
 
           <div>
@@ -324,18 +316,18 @@ export default function HomePage() {
             ) : (
               <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 40px' }}>
-                  <UField label="Groom To Be" type="text" placeholder="Groom's name" value={form.groom} onChange={v => setForm(f => ({ ...f, groom: v }))} required />
-                  <UField label="Bride To Be" type="text" placeholder="Bride's name" value={form.bride} onChange={v => setForm(f => ({ ...f, bride: v }))} required />
-                  <UField label="Contact" type="tel" placeholder="+62 ···" value={form.phone} onChange={v => setForm(f => ({ ...f, phone: v }))} required />
+                  <UField label="Groom To Be" type="text" placeholder="Alexandra" value={form.groom} onChange={v => setForm(f => ({ ...f, groom: v }))} required />
+                  <UField label="Bride To Be" type="text" placeholder="Wijaya" value={form.bride} onChange={v => setForm(f => ({ ...f, bride: v }))} required />
+                  <UField label="Contact" type="tel" placeholder="+62 ·······" value={form.phone} onChange={v => setForm(f => ({ ...f, phone: v }))} required />
                   <UField label="Email" type="email" placeholder="your@email.com" value={form.email} onChange={v => setForm(f => ({ ...f, email: v }))} required />
                   <UField label="Event Date" type="text" placeholder="dd/mm/yyyy" value={form.date} onChange={v => setForm(f => ({ ...f, date: v }))} />
-                  <UField label="City & Country" type="text" placeholder="Surabaya, Indonesia" value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} />
+                  <UField label="City & Country" type="text" placeholder="Surabaya" value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} />
                 </div>
                 <div style={{ marginBottom: 36 }}>
                   <label style={uLabel}>Your Vision</label>
                   <textarea
                     rows={4}
-                    placeholder="Tell us about your dream event..."
+                    placeholder="Tell us about your dream event...."
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                     style={{ ...uInput, resize: 'none' }}

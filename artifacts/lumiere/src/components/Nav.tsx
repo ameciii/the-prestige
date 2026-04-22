@@ -69,7 +69,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
             color: isLight ? '#fff' : 'hsl(35 10% 14%)',
             transition: 'color 0.3s',
           }}>
-            LUMIÈRE
+            THE PRESTIGE
           </div>
           <div style={{
             fontFamily: "'Nunito Sans', sans-serif",
@@ -175,7 +175,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
             }}
             style={{
               fontFamily: "'Nunito Sans', sans-serif",
-              fontSize: 26, fontWeight: 200, letterSpacing: '0.18em',
+              fontSize: 22, fontWeight: 200, letterSpacing: '0.18em',
               textTransform: 'uppercase', color: 'hsl(35 10% 14%)',
               textDecoration: 'none',
             }}

@@ -6,7 +6,7 @@ export function Footer() {
       <div className="lm-grid-footer lm-pad-h" style={{ paddingTop: 60, paddingBottom: 50, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div>
           <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.28em', textTransform: 'uppercase', marginBottom: 6, color: 'hsl(35 10% 14%)' }}>
-            LUMIÈRE
+            THE PRESTIGE
           </div>
           <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.35)', marginBottom: 22 }}>
             Event Organizer
@@ -25,10 +25,10 @@ export function Footer() {
         </div>
         <FooterCol title="Navigation" items={[
           { label: 'Home', href: '/' },
-          { label: 'About Us', href: '/' },
-          { label: 'Our Services', href: '/' },
-          { label: 'Project Showcase', href: '/portfolio' },
-          { label: 'Testimonial', href: '/' },
+          { label: 'About Us', href: '/#about' },
+          { label: 'Our Service', href: '/#services' },
+          { label: 'Project Showcase', href: '/#portfolio' },
+          { label: 'Testimonial', href: '/#testimonial' },
         ]} />
         <FooterCol title="Connect With Us" items={[
           { label: 'Instagram', href: '#', ext: true },
@@ -38,11 +38,11 @@ export function Footer() {
       </div>
 
       <div className="lm-pad-h" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 20, paddingBottom: 20, flexWrap: 'wrap', gap: 8 }}>
-        <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
-          © 2026 LUMIÈRE. All Rights Reserved.
+        <span style={{ fontSize: 10, letterSpacing: '0.08em', color: 'rgba(0,0,0,0.3)' }}>
+          © 2026 The Prestige Organizer. All rights reserved.
         </span>
-        <span style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(0,0,0,0.3)', textTransform: 'uppercase' }}>
-          Jakarta · Surabaya · Bali · Serving Worldwide
+        <span style={{ fontSize: 10, letterSpacing: '0.08em', color: 'rgba(0,0,0,0.3)' }}>
+          Jakarta | Surabaya | Bali · Serving Worldwide
         </span>
       </div>
     </footer>
