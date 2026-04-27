@@ -25,7 +25,7 @@ export default function PortfolioPage() {
   const filtered = active === 'All' ? GALLERY : GALLERY.filter(g => g.cat === active);
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: "'Nunito Sans', sans-serif" }}>
+    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif" }}>
       <Nav />
       <div style={{ paddingTop: 80 }}>
 
@@ -63,7 +63,7 @@ export default function PortfolioPage() {
                 borderBottom: active === cat ? '2px solid hsl(35 10% 14%)' : '2px solid transparent',
                 marginBottom: -1,
                 transition: 'all 0.2s',
-                fontFamily: "'Nunito Sans', sans-serif",
+                fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
                 whiteSpace: 'nowrap',
               }}
             >

@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: 'Allison Tessa';
+  src: url('/fonts/AllisonTessaOblique.ttf') format('truetype');
+  font-weight: normal;
+  font-style: oblique;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -77,7 +85,7 @@
   --input: 40 10% 88%;
   --ring: 35 10% 16%;
 
-  --app-font-sans: 'Nunito Sans', 'Helvetica Neue', Arial, sans-serif;
+  --app-font-sans: 'Proxima Nova', 'Nunito Sans', 'Helvetica Neue', Arial, sans-serif;
   --app-font-serif: Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0rem;
@@ -189,7 +197,7 @@
   background: none;
   border: none;
   padding: 0;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Proxima Nova', 'Nunito Sans', sans-serif;
 }
 
 .arrow-link:hover {
@@ -218,7 +226,7 @@
   transition: all 0.22s;
   cursor: pointer;
   border: none;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Proxima Nova', 'Nunito Sans', sans-serif;
   white-space: nowrap;
 }
 
