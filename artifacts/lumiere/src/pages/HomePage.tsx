@@ -2,7 +2,20 @@ import { useState, useRef, useEffect } from 'react';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Fade } from '@/components/Fade';
+import { Toast, type ToastData } from '@/components/Toast';
+import { submitInquiry, isValidEmail, isValidPhone } from '@/lib/submitInquiry';
 import '@/styles/home.css';
+
+const EMPTY_FORM = {
+  groom: '',
+  bride: '',
+  phone: '',
+  email: '',
+  date: '',
+  city: '',
+  message: '',
+  website: '', // honeypot — must stay empty
+};
 
 /* ═══════════════════════════════════════════════════════════════════
    DATA
@@ -91,16 +104,9 @@ const SHOWCASE_FADE_MS = 350;
    ─────────────────────────────────────────────────────────────────── */
 export default function HomePage() {
   const contactRef = useRef<HTMLElement>(null);
-  const [form, setForm] = useState({
-    groom: '',
-    bride: '',
-    phone: '',
-    email: '',
-    date: '',
-    city: '',
-    message: '',
-  });
-  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [submitting, setSubmitting] = useState(false);
+  const [toast, setToast] = useState<ToastData | null>(null);
 
   /* Showcase pagination state */
   const [showcasePage, setShowcasePage] = useState(0);
@@ -150,11 +156,32 @@ export default function HomePage() {
         sectionRef={contactRef}
         form={form}
         setForm={setForm}
-        sent={sent}
-        onSubmit={() => setSent(true)}
+        submitting={submitting}
+        onSubmit={async () => {
+          setSubmitting(true);
+          const result = await submitInquiry(form);
+          setSubmitting(false);
+
+          if (result.ok) {
+            setForm(EMPTY_FORM); // clear inputs after success
+            setToast({
+              variant: 'success',
+              title: 'Inquiry Sent',
+              message: "Thank you. We've received your inquiry and will respond within 24 hours.",
+            });
+          } else {
+            setToast({
+              variant: 'error',
+              title: 'Could Not Send',
+              message: result.error || 'Something went wrong. Please try again.',
+            });
+          }
+        }}
       />
 
       <Footer />
+
+      <Toast toast={toast} onDismiss={() => setToast(null)} />
     </div>
   );
 }
@@ -439,23 +466,41 @@ type FormState = {
   date: string;
   city: string;
   message: string;
+  /** Honeypot — bots fill this; humans never see it. Must stay empty. */
+  website: string;
 };
 
 type ContactProps = {
   sectionRef: React.RefObject<HTMLElement | null>;
   form: FormState;
   setForm: React.Dispatch<React.SetStateAction<FormState>>;
-  sent: boolean;
+  submitting: boolean;
   onSubmit: () => void;
 };
 
-function ContactSection({ sectionRef, form, setForm, sent, onSubmit }: ContactProps) {
+function ContactSection({
+  sectionRef, form, setForm, submitting, onSubmit,
+}: ContactProps) {
+  const [validationError, setValidationError] = useState<string | null>(null);
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    // Frontend validation — fail fast before hitting the network
+    if (!isValidEmail(form.email)) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+    if (!isValidPhone(form.phone)) {
+      setValidationError('Please enter a valid phone number.');
+      return;
+    }
+
+    setValidationError(null);
     onSubmit();
   }
 
@@ -482,54 +527,66 @@ function ContactSection({ sectionRef, form, setForm, sent, onSubmit }: ContactPr
         </div>
 
         <div>
-          {sent ? (
-            <SentSuccess />
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="hp-form__row">
-                <FormField label="Groom To Be" type="text" placeholder="Alexandra"
-                  value={form.groom} onChange={(v) => update('groom', v)} required />
-                <FormField label="Bride To Be" type="text" placeholder="Wijaya"
-                  value={form.bride} onChange={(v) => update('bride', v)} required />
-                <FormField label="Contact" type="tel" placeholder="+62 ·······"
-                  value={form.phone} onChange={(v) => update('phone', v)} required />
-                <FormField label="Email" type="email" placeholder="your@email.com"
-                  value={form.email} onChange={(v) => update('email', v)} required />
-                <FormField label="Event Date" type="text" placeholder="dd/mm/yyyy"
-                  value={form.date} onChange={(v) => update('date', v)} />
-                <FormField label="City & Country" type="text" placeholder="Surabaya"
-                  value={form.city} onChange={(v) => update('city', v)} />
-              </div>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="hp-form__row">
+              <FormField label="Groom To Be" type="text" placeholder="Alexandra"
+                value={form.groom} onChange={(v) => update('groom', v)} required />
+              <FormField label="Bride To Be" type="text" placeholder="Wijaya"
+                value={form.bride} onChange={(v) => update('bride', v)} required />
+              <FormField label="Contact" type="tel" placeholder="+62 ·······"
+                value={form.phone} onChange={(v) => update('phone', v)} required />
+              <FormField label="Email" type="email" placeholder="your@email.com"
+                value={form.email} onChange={(v) => update('email', v)} required />
+              <FormField label="Event Date" type="text" placeholder="dd/mm/yyyy"
+                value={form.date} onChange={(v) => update('date', v)} />
+              <FormField label="City & Country" type="text" placeholder="Surabaya"
+                value={form.city} onChange={(v) => update('city', v)} />
+            </div>
 
-              <div className="hp-form__field hp-form__field--full">
-                <label className="hp-form__label">Your Vision</label>
-                <textarea
-                  className="hp-form__textarea"
-                  rows={4}
-                  placeholder="Tell us about your dream event...."
-                  value={form.message}
-                  onChange={(e) => update('message', e.target.value)}
+            <div className="hp-form__field hp-form__field--full">
+              <label className="hp-form__label">Your Vision</label>
+              <textarea
+                className="hp-form__textarea"
+                rows={4}
+                placeholder="Tell us about your dream event...."
+                value={form.message}
+                onChange={(e) => update('message', e.target.value)}
+              />
+            </div>
+
+            {/* Honeypot — hidden from humans, bots fill it. Aria-hidden + tabIndex
+                make it inaccessible to assistive tech and keyboard users. */}
+            <div className="hp-form__honeypot" aria-hidden="true">
+              <label>
+                Website
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={(e) => update('website', e.target.value)}
                 />
-              </div>
+              </label>
+            </div>
 
-              <button type="submit" className="hp-form__submit">Send Inquiry</button>
-            </form>
-          )}
+            {/* Inline validation error (network errors handled by toast) */}
+            {validationError && (
+              <div className="hp-form__error" role="alert">
+                {validationError}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="hp-form__submit"
+              disabled={submitting}
+            >
+              {submitting ? 'Sending…' : 'Send Inquiry'}
+            </button>
+          </form>
         </div>
       </Fade>
     </section>
-  );
-}
-
-function SentSuccess() {
-  return (
-    <div className="hp-contact__sent">
-      <div className="hp-contact__sent-icon">✦</div>
-      <div className="hp-contact__sent-title">Thank You</div>
-      <p className="hp-contact__sent-msg">
-        We've received your inquiry and will respond within 24 hours.
-      </p>
-    </div>
   );
 }
 
