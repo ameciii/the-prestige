@@ -1,8 +1,33 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'wouter';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Fade } from '@/components/Fade';
+
+/* ─── SHOWCASE PAGES (3 pages × 5 photos) ───────────────────────── */
+const SHOWCASE_PAGES: string[][] = [
+  [
+    '/photos/showcase-1.jpg',
+    '/photos/showcase-2.jpg',
+    '/photos/showcase-3.jpg',
+    '/photos/showcase-4.jpg',
+    '/photos/showcase-5.jpg',
+  ],
+  [
+    '/photos/showcase-6.jpg',
+    '/photos/showcase-7.jpg',
+    '/photos/showcase-8.jpg',
+    '/photos/showcase-9.jpg',
+    '/photos/showcase-10.jpg',
+  ],
+  [
+    '/photos/showcase-11.jpg',
+    '/photos/showcase-12.jpg',
+    '/photos/showcase-13.jpg',
+    '/photos/showcase-14.jpg',
+    '/photos/showcase-15.jpg',
+  ],
+];
 
 /* ─── DATA ──────────────────────────────────────────────────────── */
 
@@ -56,13 +81,32 @@ export default function HomePage() {
   const contactRef = useRef<HTMLElement>(null);
   const [form, setForm] = useState({ groom: '', bride: '', phone: '', email: '', date: '', city: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [showcasePage, setShowcasePage] = useState(0);
+  const [showcaseFade, setShowcaseFade] = useState(true);
+
+  // Preload all showcase images on mount so pagination is instant
+  useEffect(() => {
+    SHOWCASE_PAGES.flat().forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   function scrollToContact() {
     contactRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function goToShowcasePage(newPage: number) {
+    if (newPage === showcasePage) return;
+    setShowcaseFade(false);
+    setTimeout(() => {
+      setShowcasePage(((newPage % SHOWCASE_PAGES.length) + SHOWCASE_PAGES.length) % SHOWCASE_PAGES.length);
+      setShowcaseFade(true);
+    }, 350);
+  }
+
   return (
-    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: "'Nunito Sans', sans-serif" }}>
+    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif" }}>
       <Nav onContactClick={scrollToContact} transparent />
 
       {/* ══ 1. HERO — FULL BLEED ════════════════════════════════════ */}
@@ -70,30 +114,34 @@ export default function HomePage() {
         <img
           src="/photos/hero.jpg"
           alt="Hero"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block', filter: 'grayscale(100%)' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', filter: 'grayscale(100%)' }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)' }} />
 
-        <div className="lm-hero-text" style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 44px 48px', maxWidth: 560 }}>
+        <div className="lm-hero-text" style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 44px 48px', maxWidth: 800 }}>
           <div style={{ animation: 'lm-fade-up 1s ease 0.2s both' }}>
             <div style={{
-              fontFamily: "'Great Vibes', cursive",
+              fontFamily: "'Allison Tessa', cursive",
               fontSize: 'clamp(64px, 8vw, 108px)',
               fontWeight: 400,
               color: '#fff',
               lineHeight: 1.1,
               marginBottom: 2,
+              whiteSpace: 'nowrap',
             }}>
               Love Journey
             </div>
             <div style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
               fontSize: 'clamp(13px, 1.3vw, 18px)',
               fontWeight: 700,
               letterSpacing: '0.32em',
               textTransform: 'uppercase',
               color: 'rgba(255,255,255,0.9)',
               marginBottom: 20,
+              marginLeft: 'clamp(200px, 26vw, 380px)',
+              marginTop: 24,
+              whiteSpace: 'nowrap',
             }}>
               Begins Here...
             </div>
@@ -110,7 +158,7 @@ export default function HomePage() {
               background: 'hsl(35 10% 14%)', color: '#fff',
               border: 'none', padding: '13px 30px',
               fontSize: 9.5, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase',
-              cursor: 'pointer', fontFamily: "'Nunito Sans', sans-serif",
+              cursor: 'pointer', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
             }}>
               Inquire Now
             </button>
@@ -145,7 +193,7 @@ export default function HomePage() {
           <button onClick={scrollToContact} style={{
             background: 'none', border: 'none', cursor: 'pointer', padding: 0,
             fontSize: 10.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: 'hsl(35 10% 14%)', fontFamily: "'Nunito Sans', sans-serif",
+            color: 'hsl(35 10% 14%)', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
             display: 'inline-flex', alignItems: 'center', gap: 0, alignSelf: 'flex-start',
             textDecoration: 'underline', textUnderlineOffset: 4,
           }}>
@@ -215,39 +263,74 @@ export default function HomePage() {
         </Fade>
 
         <Fade direction="in">
-          <div className="lm-showcase-top" style={{ display: 'grid', gridTemplateColumns: '55fr 45fr', gap: 3, marginBottom: 3, height: 440 }}>
-            <div style={{ overflow: 'hidden', height: '100%' }}>
-              <img src="/photos/showcase-1.jpg" alt="Showcase 1"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', display: 'block', transition: 'transform 0.5s ease' }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
-            </div>
-            <div style={{ overflow: 'hidden', height: '100%' }}>
-              <img src="/photos/showcase-2.jpg" alt="Showcase 2"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', transition: 'transform 0.5s ease' }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
-            </div>
-          </div>
-          <div className="lm-showcase-bottom" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 3 }}>
-            {[
-              '/photos/showcase-3.jpg',
-              '/photos/showcase-4.jpg',
-              '/photos/showcase-5.jpg',
-            ].map((src, i) => (
-              <div key={i} style={{ overflow: 'hidden' }}>
-                <img src={src} alt={`Showcase ${i + 3}`}
-                  style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', objectPosition: 'center', display: 'block', transition: 'transform 0.5s ease' }}
+          <div
+            style={{
+              opacity: showcaseFade ? 1 : 0,
+              transform: showcaseFade ? 'translateY(0)' : 'translateY(8px)',
+              transition: 'opacity 0.35s ease, transform 0.35s ease',
+            }}
+          >
+            <div className="lm-showcase-top" style={{ display: 'grid', gridTemplateColumns: '55fr 45fr', gap: 3, marginBottom: 3, height: 440 }}>
+              <div style={{ overflow: 'hidden', height: '100%' }}>
+                <img src={SHOWCASE_PAGES[showcasePage][0]} alt={`Showcase ${showcasePage * 5 + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', display: 'block', transition: 'transform 0.5s ease' }}
                   onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
                   onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
               </div>
-            ))}
+              <div style={{ overflow: 'hidden', height: '100%' }}>
+                <img src={SHOWCASE_PAGES[showcasePage][1]} alt={`Showcase ${showcasePage * 5 + 2}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', transition: 'transform 0.5s ease' }}
+                  onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
+                  onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
+              </div>
+            </div>
+            <div className="lm-showcase-bottom" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 3 }}>
+              {SHOWCASE_PAGES[showcasePage].slice(2).map((src, i) => (
+                <div key={`${showcasePage}-${i}`} style={{ overflow: 'hidden' }}>
+                  <img src={src} alt={`Showcase ${showcasePage * 5 + i + 3}`}
+                    style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', objectPosition: 'center', display: 'block', transition: 'transform 0.5s ease' }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
+                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
+                </div>
+              ))}
+            </div>
           </div>
         </Fade>
 
-        <div className="lm-showcase-nav" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 32, gap: 10 }}>
-          <button aria-label="Previous" style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)' }}>‹</button>
-          <button aria-label="Next" style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)' }}>›</button>
+        <div className="lm-showcase-nav" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 32, gap: 14 }}>
+          <button
+            aria-label="Previous"
+            onClick={() => goToShowcasePage(showcasePage - 1)}
+            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)', transition: 'all 0.2s ease' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'hsl(35 10% 14%)'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'hsl(35 10% 14%)'; }}
+          >‹</button>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '0 8px' }}>
+            {SHOWCASE_PAGES.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Go to page ${i + 1}`}
+                onClick={() => goToShowcasePage(i)}
+                style={{
+                  width: i === showcasePage ? 28 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  border: 'none',
+                  background: i === showcasePage ? 'hsl(35 10% 14%)' : 'rgba(0,0,0,0.2)',
+                  cursor: 'pointer',
+                  padding: 0,
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
+          <button
+            aria-label="Next"
+            onClick={() => goToShowcasePage(showcasePage + 1)}
+            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)', transition: 'all 0.2s ease' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'hsl(35 10% 14%)'; e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'hsl(35 10% 14%)'; }}
+          >›</button>
         </div>
       </section>
 
@@ -265,7 +348,7 @@ export default function HomePage() {
           <button onClick={scrollToContact} style={{
             background: 'none', border: 'none', cursor: 'pointer', padding: 0,
             fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase',
-            color: 'rgba(0,0,0,0.38)', fontFamily: "'Nunito Sans', sans-serif",
+            color: 'rgba(0,0,0,0.38)', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
           }}>
             See More ↓
           </button>
@@ -337,7 +420,7 @@ export default function HomePage() {
                   background: 'hsl(35 10% 14%)', color: '#fff',
                   border: 'none', padding: '15px 0', width: '100%',
                   fontSize: 10, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase',
-                  cursor: 'pointer', fontFamily: "'Nunito Sans', sans-serif",
+                  cursor: 'pointer', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
                 }}>
                   Send Inquiry
                 </button>
@@ -371,7 +454,7 @@ const uInput: React.CSSProperties = {
   fontSize: 14,
   outline: 'none',
   background: 'transparent',
-  fontFamily: "'Nunito Sans', sans-serif",
+  fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
   color: 'hsl(35 10% 14%)',
   boxSizing: 'border-box' as const,
   display: 'block',

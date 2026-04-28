@@ -63,7 +63,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
           lineHeight: 1,
         }}>
           <div style={{
-            fontFamily: "'Nunito Sans', sans-serif",
+            fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
             fontSize: 14, fontWeight: 800, letterSpacing: '0.26em',
             textTransform: 'uppercase',
             color: isLight ? '#fff' : 'hsl(35 10% 14%)',
@@ -72,7 +72,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
             THE PRESTIGE
           </div>
           <div style={{
-            fontFamily: "'Nunito Sans', sans-serif",
+            fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
             fontSize: 7.5, fontWeight: 600, letterSpacing: '0.28em',
             textTransform: 'uppercase',
             color: isLight ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.35)',
@@ -97,7 +97,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
                   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
                 }
               }} style={{
-                fontFamily: "'Nunito Sans', sans-serif",
+                fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
                 fontSize: 9, fontWeight: 700, letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: active ? activeLinkColor : linkColor,
@@ -116,7 +116,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
         {/* INQUIRE NOW — right */}
         <div className="lm-nav-links-desktop" style={{ marginLeft: 'auto', flex: '0 0 auto' }}>
           <button onClick={handleContact} style={{
-            fontFamily: "'Nunito Sans', sans-serif",
+            fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
             fontSize: 9, fontWeight: 700, letterSpacing: '0.2em',
             textTransform: 'uppercase',
             color: isLight ? '#fff' : 'hsl(35 10% 14%)',
@@ -174,7 +174,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
               }
             }}
             style={{
-              fontFamily: "'Nunito Sans', sans-serif",
+              fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
               fontSize: 22, fontWeight: 200, letterSpacing: '0.18em',
               textTransform: 'uppercase', color: 'hsl(35 10% 14%)',
               textDecoration: 'none',
@@ -186,7 +186,7 @@ export function Nav({ onContactClick, transparent = false }: NavProps) {
         <button
           onClick={handleContact}
           style={{
-            fontFamily: "'Nunito Sans', sans-serif",
+            fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
             fontSize: 26, fontWeight: 200, letterSpacing: '0.18em',
             textTransform: 'uppercase', color: 'hsl(35 10% 14%)',
             background: 'none', border: 'none', cursor: 'pointer',
