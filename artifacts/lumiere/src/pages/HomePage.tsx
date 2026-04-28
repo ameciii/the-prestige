@@ -1,10 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'wouter';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { Fade } from '@/components/Fade';
+import '@/styles/home.css';
 
-/* ─── SHOWCASE PAGES (3 pages × 5 photos) ───────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   DATA
+   ─────────────────────────────────────────────────────────────────── */
+
+/** Showcase: 3 pages × 5 photos. All images preloaded on mount. */
 const SHOWCASE_PAGES: string[][] = [
   [
     '/photos/showcase-1.jpg',
@@ -29,31 +33,35 @@ const SHOWCASE_PAGES: string[][] = [
   ],
 ];
 
-/* ─── DATA ──────────────────────────────────────────────────────── */
-
-const SERVICES_LIST = [
+const SERVICES = [
   {
-    num: '01', name: 'Engagement Ceremony',
-    desc: 'An engagement marks the beginning of a new chapter, symbolizing a shared commitment and the first union of two families. We recognize the importance of honoring diverse cultural traditions and values.',
+    num: '01',
+    name: 'Engagement Ceremony',
+    desc: "An engagement marks the beginning of a new chapter, symbolizing a shared commitment and the first union of two families. We recognize the importance of honoring diverse cultural traditions and values.",
   },
   {
-    num: '02', name: 'Wedding Reception',
+    num: '02',
+    name: 'Wedding Reception',
     desc: 'A ballroom wedding offers versatile elegance, from modern minimalism to lavish floral settings, with every detail designed to reflect your vision.',
   },
   {
-    num: '03', name: 'Destination Wedding - Bali',
+    num: '03',
+    name: 'Destination Wedding - Bali',
     desc: 'For a more intimate and relaxed celebration, from golden sunsets by the sea to enchanting starlit evenings, nature becomes a breathtaking backdrop for your special day.',
   },
   {
-    num: '04', name: 'Overseas Wedding Planner',
+    num: '04',
+    name: 'Overseas Wedding Planner',
     desc: 'Our full-service planning of your overseas wedding is flawlessly executed from curated dining experiences to luxury accommodations. We design bespoke celebrations across the globe.',
   },
   {
-    num: '05', name: 'Anniversary / Birthday Party',
+    num: '05',
+    name: 'Anniversary / Birthday Party',
     desc: 'Every anniversary / birthday is a meaningful milestone, and each celebration should reflect your unique vision.',
   },
   {
-    num: '06', name: 'Corporate Events & Others',
+    num: '06',
+    name: 'Corporate Events & Others',
     desc: 'We provide a comprehensive range of corporate event management and creative services. From team building activities to large scale corporate celebrations and gala events, each project is handled with innovation.',
   },
 ];
@@ -76,15 +84,29 @@ const TESTIMONIALS = [
   },
 ];
 
-/* ─── COMPONENT ─────────────────────────────────────────────────── */
+const SHOWCASE_FADE_MS = 350;
+
+/* ═══════════════════════════════════════════════════════════════════
+   COMPONENT
+   ─────────────────────────────────────────────────────────────────── */
 export default function HomePage() {
   const contactRef = useRef<HTMLElement>(null);
-  const [form, setForm] = useState({ groom: '', bride: '', phone: '', email: '', date: '', city: '', message: '' });
+  const [form, setForm] = useState({
+    groom: '',
+    bride: '',
+    phone: '',
+    email: '',
+    date: '',
+    city: '',
+    message: '',
+  });
   const [sent, setSent] = useState(false);
-  const [showcasePage, setShowcasePage] = useState(0);
-  const [showcaseFade, setShowcaseFade] = useState(true);
 
-  // Preload all showcase images on mount so pagination is instant
+  /* Showcase pagination state */
+  const [showcasePage, setShowcasePage] = useState(0);
+  const [showcaseFading, setShowcaseFading] = useState(false);
+
+  /* Preload every showcase image once so page changes are instant */
   useEffect(() => {
     SHOWCASE_PAGES.flat().forEach((src) => {
       const img = new Image();
@@ -96,381 +118,446 @@ export default function HomePage() {
     contactRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  function goToShowcasePage(newPage: number) {
-    if (newPage === showcasePage) return;
-    setShowcaseFade(false);
+  function goToShowcasePage(target: number) {
+    if (target === showcasePage) return;
+    const wrapped = ((target % SHOWCASE_PAGES.length) + SHOWCASE_PAGES.length) % SHOWCASE_PAGES.length;
+    setShowcaseFading(true);
     setTimeout(() => {
-      setShowcasePage(((newPage % SHOWCASE_PAGES.length) + SHOWCASE_PAGES.length) % SHOWCASE_PAGES.length);
-      setShowcaseFade(true);
-    }, 350);
+      setShowcasePage(wrapped);
+      setShowcaseFading(false);
+    }, SHOWCASE_FADE_MS);
   }
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif" }}>
+    <div className="hp-root">
       <Nav onContactClick={scrollToContact} transparent />
 
-      {/* ══ 1. HERO — FULL BLEED ════════════════════════════════════ */}
-      <section style={{ position: 'relative', width: '100%', height: '100vh', minHeight: 600, overflow: 'hidden' }}>
-        <img
-          src="/photos/hero.jpg"
-          alt="Hero"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', filter: 'grayscale(100%)' }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)' }} />
+      <HeroSection onCtaClick={scrollToContact} />
 
-        <div className="lm-hero-text" style={{ position: 'absolute', bottom: 0, left: 0, padding: '0 44px 48px', maxWidth: 800 }}>
-          <div style={{ animation: 'lm-fade-up 1s ease 0.2s both' }}>
-            <div style={{
-              fontFamily: "'Allison Tessa', cursive",
-              fontSize: 'clamp(64px, 8vw, 108px)',
-              fontWeight: 400,
-              color: '#fff',
-              lineHeight: 1.1,
-              marginBottom: 2,
-              whiteSpace: 'nowrap',
-            }}>
-              Love Journey
-            </div>
-            <div style={{
-              fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
-              fontSize: 'clamp(13px, 1.3vw, 18px)',
-              fontWeight: 700,
-              letterSpacing: '0.32em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.9)',
-              marginBottom: 20,
-              marginLeft: 'clamp(200px, 26vw, 380px)',
-              marginTop: 24,
-              whiteSpace: 'nowrap',
-            }}>
-              Begins Here...
-            </div>
-          </div>
-          <p style={{
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.6)', marginBottom: 28, marginTop: 0,
-            animation: 'lm-fade-in 0.8s ease 0.5s both',
-          }}>
-            Creating A Story That Is<br />Uniquely Yours.
-          </p>
-          <div style={{ animation: 'lm-fade-up 0.7s ease 0.65s both' }}>
-            <button onClick={scrollToContact} style={{
-              background: 'hsl(35 10% 14%)', color: '#fff',
-              border: 'none', padding: '13px 30px',
-              fontSize: 9.5, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase',
-              cursor: 'pointer', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
-            }}>
-              Inquire Now
-            </button>
-          </div>
-        </div>
-      </section>
+      <AboutSection onCtaClick={scrollToContact} />
 
-      {/* ══ 2. ABOUT — TEXT LEFT + IMAGE+STATS RIGHT ════════════════ */}
-      <Fade as="section" id="about" direction="in" className="lm-grid-2asym" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)', minHeight: 560 }}>
-        <div className="lm-about-text" style={{ padding: '70px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span>about</span>
-              <span style={{ width: 1, height: 10, background: 'rgba(0,0,0,0.25)', display: 'inline-block', flexShrink: 0 }} />
-              <span style={{ fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 10, color: 'rgba(0,0,0,0.5)' }}>THE PRESTIGE ORGANIZER</span>
-            </div>
-            <h2 style={{ fontSize: 'clamp(24px, 2.8vw, 38px)', fontWeight: 800, letterSpacing: '0.03em', textTransform: 'uppercase', margin: '0 0 24px', lineHeight: 1.2 }}>
-              Beyond Planning,<br />We Create Meaning
-            </h2>
-            <p style={{ fontSize: 13.5, lineHeight: 1.9, color: 'rgba(0,0,0,0.55)', margin: '0 0 24px' }}>
-              We are a passionate team in the wedding industry, crafting unique Celebration of Love moments inspired by each couple's story. At The Prestige, we create detailed, seamless wedding plans that capture laughter, love, and emotion to be cherished forever.
-            </p>
-            <div style={{ marginTop: 28, marginBottom: 36, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-              <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', marginBottom: 8 }}>
-                Our Team
-              </div>
-              <div style={{ fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.5)' }}>
-                Conceptor | Planner | Director
-              </div>
-            </div>
-          </div>
-          <button onClick={scrollToContact} style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-            fontSize: 10.5, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: 'hsl(35 10% 14%)', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
-            display: 'inline-flex', alignItems: 'center', gap: 0, alignSelf: 'flex-start',
-            textDecoration: 'underline', textUnderlineOffset: 4,
-          }}>
-            Know Us Better
-          </button>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ flex: 1, overflow: 'hidden', minHeight: 400 }}>
-            <img
-              src="/photos/about-team.jpg"
-              alt="LUMIÈRE team"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
-            />
-          </div>
-          <div className="lm-about-stats" style={{ display: 'flex', gap: 0, background: '#fff', padding: '22px 36px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', color: 'hsl(35 10% 14%)', lineHeight: 1 }}>1000+</div>
-              <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginTop: 6 }}>Events Crafted</div>
-            </div>
-            <div style={{ width: 1, background: 'rgba(0,0,0,0.1)', alignSelf: 'stretch', margin: '0 24px' }} />
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', color: 'hsl(35 10% 14%)', lineHeight: 1 }}>10+</div>
-              <div style={{ fontSize: 8.5, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginTop: 6 }}>Years of Love</div>
-            </div>
-          </div>
-        </div>
-      </Fade>
+      <ServicesSection />
 
-      {/* ══ 3. SERVICES ════════════════════════════════════════════ */}
-      <section id="services" style={{ background: '#F4F2ED' }}>
-        <Fade className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70 }}>
-          <div style={{ marginBottom: 50 }}>
-            <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 16 }}>
-              what we do
-            </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
-              Our Services
-            </h2>
-          </div>
-          <div className="lm-grid-svc">
-            {SERVICES_LIST.map((s, i) => (
-              <div key={s.name} className="lm-svc-item" style={{
-                padding: '28px 0',
-                borderBottom: '1px solid rgba(0,0,0,0.1)',
-                borderRight: i % 2 === 0 ? '1px solid rgba(0,0,0,0.1)' : 'none',
-                paddingRight: i % 2 === 0 ? 48 : 0,
-                paddingLeft: i % 2 !== 0 ? 48 : 0,
-              }}>
-                <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(0,0,0,0.28)', marginBottom: 14 }}>{s.num}</div>
-                <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.04em', color: 'hsl(35 10% 14%)', marginBottom: 12, textTransform: 'uppercase' }}>{s.name}</div>
-                <p style={{ fontSize: 12.5, lineHeight: 1.82, color: 'rgba(0,0,0,0.52)', margin: 0 }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Fade>
-      </section>
+      <ShowcaseSection
+        page={showcasePage}
+        fading={showcaseFading}
+        onPageChange={goToShowcasePage}
+      />
 
-      {/* ══ 4. PROJECT SHOWCASE ════════════════════════════════════ */}
-      <section id="portfolio" className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70 }}>
-        <Fade style={{ marginBottom: 40 }}>
-          <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 16 }}>
-            our work
-          </div>
-          <h2 style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
-            Project Showcase
-          </h2>
-        </Fade>
+      <TestimonialsSection onSeeMore={scrollToContact} />
 
-        <Fade direction="in">
-          <div
-            style={{
-              opacity: showcaseFade ? 1 : 0,
-              transform: showcaseFade ? 'translateY(0)' : 'translateY(8px)',
-              transition: 'opacity 0.35s ease, transform 0.35s ease',
-            }}
-          >
-            <div className="lm-showcase-top" style={{ display: 'grid', gridTemplateColumns: '55fr 45fr', gap: 3, marginBottom: 3, height: 440 }}>
-              <div style={{ overflow: 'hidden', height: '100%' }}>
-                <img src={SHOWCASE_PAGES[showcasePage][0]} alt={`Showcase ${showcasePage * 5 + 1}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', display: 'block', transition: 'transform 0.5s ease' }}
-                  onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
-                  onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
-              </div>
-              <div style={{ overflow: 'hidden', height: '100%' }}>
-                <img src={SHOWCASE_PAGES[showcasePage][1]} alt={`Showcase ${showcasePage * 5 + 2}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', transition: 'transform 0.5s ease' }}
-                  onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
-                  onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
-              </div>
-            </div>
-            <div className="lm-showcase-bottom" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 3 }}>
-              {SHOWCASE_PAGES[showcasePage].slice(2).map((src, i) => (
-                <div key={`${showcasePage}-${i}`} style={{ overflow: 'hidden' }}>
-                  <img src={src} alt={`Showcase ${showcasePage * 5 + i + 3}`}
-                    style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', objectPosition: 'center', display: 'block', transition: 'transform 0.5s ease' }}
-                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
-                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </Fade>
-
-        <div className="lm-showcase-nav" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 32, gap: 14 }}>
-          <button
-            aria-label="Previous"
-            onClick={() => goToShowcasePage(showcasePage - 1)}
-            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)', transition: 'all 0.2s ease' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'hsl(35 10% 14%)'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'hsl(35 10% 14%)'; }}
-          >‹</button>
-          <div style={{ display: 'flex', gap: 8, alignItems: 'center', margin: '0 8px' }}>
-            {SHOWCASE_PAGES.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to page ${i + 1}`}
-                onClick={() => goToShowcasePage(i)}
-                style={{
-                  width: i === showcasePage ? 28 : 8,
-                  height: 8,
-                  borderRadius: 4,
-                  border: 'none',
-                  background: i === showcasePage ? 'hsl(35 10% 14%)' : 'rgba(0,0,0,0.2)',
-                  cursor: 'pointer',
-                  padding: 0,
-                  transition: 'all 0.3s ease',
-                }}
-              />
-            ))}
-          </div>
-          <button
-            aria-label="Next"
-            onClick={() => goToShowcasePage(showcasePage + 1)}
-            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.2)', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, color: 'hsl(35 10% 14%)', transition: 'all 0.2s ease' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'hsl(35 10% 14%)'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = 'hsl(35 10% 14%)'; }}
-          >›</button>
-        </div>
-      </section>
-
-      {/* ══ 5. TESTIMONIALS ════════════════════════════════════════ */}
-      <section id="testimonial" className="lm-pad-h" style={{ paddingTop: 70, paddingBottom: 70, borderTop: '1px solid rgba(0,0,0,0.08)', background: '#FAF9F7' }}>
-        <Fade style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 44 }}>
-          <div>
-            <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 16 }}>
-              what they say
-            </div>
-            <h2 style={{ fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
-              Testimonial
-            </h2>
-          </div>
-          <button onClick={scrollToContact} style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-            fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase',
-            color: 'rgba(0,0,0,0.38)', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
-          }}>
-            See More ↓
-          </button>
-        </Fade>
-        <div className="lm-grid-3">
-          {TESTIMONIALS.map((t, i) => (
-            <Fade key={t.names} delay={i * 0.1}>
-              <div style={{ overflow: 'hidden' }}>
-                <img src={t.img} alt={t.names}
-                  style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', objectPosition: 'center top', display: 'block' }} />
-              </div>
-              <div style={{ paddingTop: 18, paddingBottom: 28, borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'hsl(35 10% 14%)', marginBottom: 10 }}>{t.names}</div>
-                <p style={{ fontSize: 12.5, lineHeight: 1.75, color: 'rgba(0,0,0,0.5)', margin: 0, fontStyle: 'italic' }}>"{t.quote}"</p>
-              </div>
-            </Fade>
-          ))}
-        </div>
-      </section>
-
-      {/* ══ 6. CONTACT ════════════════════════════════════════════════ */}
-      <section id="contact" ref={contactRef} style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-        <Fade delay={0.1} className="lm-grid-form lm-pad-h" style={{ paddingTop: 70, paddingBottom: 80 }}>
-          <div>
-            <div style={{ fontSize: 11, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.06em', marginBottom: 20 }}>
-              let's connect
-            </div>
-            <h2 style={{ fontSize: 'clamp(24px, 2.5vw, 36px)', fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase', margin: '0 0 24px', lineHeight: 1.25 }}>
-              Love Journey<br />Begins Here...
-            </h2>
-            <p style={{ fontSize: 13, lineHeight: 1.85, color: 'rgba(0,0,0,0.5)', margin: '0 0 44px', maxWidth: 320 }}>
-              Every extraordinary event begins with a conversation. We invite you to share your vision with us, and allow our dedicated team to transform it into an unforgettable experience.
-            </p>
-            <div style={{ marginTop: 8 }}>
-              <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', marginBottom: 10 }}>ThePrestigeOrganizer@gmail.com</div>
-              <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', marginBottom: 10 }}>+62 811 3566 299</div>
-              <div style={{ fontSize: 13, color: 'hsl(35 10% 14%)', lineHeight: 1.7 }}>Jakarta | Surabaya | Bali<br />Serving Worldwide</div>
-            </div>
-          </div>
-
-          <div>
-            {sent ? (
-              <div style={{ padding: '80px 0', textAlign: 'center' }}>
-                <div style={{ fontSize: 32, marginBottom: 20, color: 'rgba(0,0,0,0.2)' }}>✦</div>
-                <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.06em', marginBottom: 14, textTransform: 'uppercase', color: 'hsl(35 10% 14%)' }}>Thank You</div>
-                <p style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)', lineHeight: 1.8, margin: 0 }}>We've received your inquiry and will respond within 24 hours.</p>
-              </div>
-            ) : (
-              <form onSubmit={e => { e.preventDefault(); setSent(true); }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 40px' }}>
-                  <UField label="Groom To Be" type="text" placeholder="Alexandra" value={form.groom} onChange={v => setForm(f => ({ ...f, groom: v }))} required />
-                  <UField label="Bride To Be" type="text" placeholder="Wijaya" value={form.bride} onChange={v => setForm(f => ({ ...f, bride: v }))} required />
-                  <UField label="Contact" type="tel" placeholder="+62 ·······" value={form.phone} onChange={v => setForm(f => ({ ...f, phone: v }))} required />
-                  <UField label="Email" type="email" placeholder="your@email.com" value={form.email} onChange={v => setForm(f => ({ ...f, email: v }))} required />
-                  <UField label="Event Date" type="text" placeholder="dd/mm/yyyy" value={form.date} onChange={v => setForm(f => ({ ...f, date: v }))} />
-                  <UField label="City & Country" type="text" placeholder="Surabaya" value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} />
-                </div>
-                <div style={{ marginBottom: 36 }}>
-                  <label style={uLabel}>Your Vision</label>
-                  <textarea
-                    rows={4}
-                    placeholder="Tell us about your dream event...."
-                    value={form.message}
-                    onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                    style={{ ...uInput, resize: 'none' }}
-                  />
-                </div>
-                <button type="submit" style={{
-                  background: 'hsl(35 10% 14%)', color: '#fff',
-                  border: 'none', padding: '15px 0', width: '100%',
-                  fontSize: 10, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase',
-                  cursor: 'pointer', fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
-                }}>
-                  Send Inquiry
-                </button>
-              </form>
-            )}
-          </div>
-        </Fade>
-      </section>
+      <ContactSection
+        sectionRef={contactRef}
+        form={form}
+        setForm={setForm}
+        sent={sent}
+        onSubmit={() => setSent(true)}
+      />
 
       <Footer />
     </div>
   );
 }
 
-/* ─── FORM HELPERS ───────────────────────────────────────────────── */
-const uLabel: React.CSSProperties = {
-  display: 'block',
-  fontSize: 9,
-  fontWeight: 700,
-  letterSpacing: '0.26em',
-  textTransform: 'uppercase' as const,
-  color: 'rgba(0,0,0,0.3)',
-  marginBottom: 10,
+/* ═══════════════════════════════════════════════════════════════════
+   1. HERO
+   ─────────────────────────────────────────────────────────────────── */
+function HeroSection({ onCtaClick }: { onCtaClick: () => void }) {
+  return (
+    <section className="hp-hero">
+      <img className="hp-hero__img" src="/photos/hero.jpg" alt="Hero" />
+      <div className="hp-hero__overlay" />
+
+      <div className="hp-hero__content lm-hero-text">
+        <div className="hp-hero__heading-block">
+          <div className="hp-hero__title">Love Journey</div>
+          <div className="hp-hero__subtitle">Begins Here...</div>
+        </div>
+        <p className="hp-hero__tagline">
+          Creating A Story That Is<br />Uniquely Yours.
+        </p>
+        <div className="hp-hero__cta-wrap">
+          <button type="button" className="hp-cta-dark" onClick={onCtaClick}>
+            Inquire Now
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   2. ABOUT
+   ─────────────────────────────────────────────────────────────────── */
+function AboutSection({ onCtaClick }: { onCtaClick: () => void }) {
+  return (
+    <Fade as="section" id="about" direction="in" className="hp-about lm-grid-2asym">
+      <div className="hp-about__text-col lm-about-text">
+        <div>
+          <div className="hp-about__breadcrumb">
+            <span>about</span>
+            <span className="hp-about__breadcrumb-divider" />
+            <span className="hp-about__breadcrumb-name">THE PRESTIGE ORGANIZER</span>
+          </div>
+
+          <h2 className="hp-about__heading">
+            Beyond Planning,<br />We Create Meaning
+          </h2>
+
+          <p className="hp-about__paragraph">
+            We are a passionate team in the wedding industry, crafting unique
+            Celebration of Love moments inspired by each couple's story. At The
+            Prestige, we create detailed, seamless wedding plans that capture
+            laughter, love, and emotion to be cherished forever.
+          </p>
+
+          <div className="hp-about__team-row">
+            <div className="hp-about__team-label">Our Team</div>
+            <div className="hp-about__team-roles">Conceptor | Planner | Director</div>
+          </div>
+        </div>
+
+        <button type="button" className="hp-about__cta-link" onClick={onCtaClick}>
+          Know Us Better
+        </button>
+      </div>
+
+      <div className="hp-about__media-col">
+        <div className="hp-about__media-frame">
+          <img className="hp-about__media-img" src="/photos/about-team.jpg" alt="The Prestige team" />
+        </div>
+        <div className="hp-about__stats lm-about-stats">
+          <Stat value="1000+" label="Events Crafted" />
+          <span className="hp-about__stat-divider" />
+          <Stat value="10+" label="Years of Love" />
+        </div>
+      </div>
+    </Fade>
+  );
+}
+
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="hp-about__stat">
+      <div className="hp-about__stat-value">{value}</div>
+      <div className="hp-about__stat-label">{label}</div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   3. SERVICES
+   ─────────────────────────────────────────────────────────────────── */
+function ServicesSection() {
+  return (
+    <section id="services" className="hp-services">
+      <Fade className="hp-services__inner lm-pad-h">
+        <header className="hp-services__header">
+          <div className="hp-eyebrow">what we do</div>
+          <h2 className="hp-section-title">Our Services</h2>
+        </header>
+
+        <div className="lm-grid-svc">
+          {SERVICES.map((service, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <article
+                key={service.num}
+                className={`hp-services__item ${isLeft ? 'hp-services__item--left' : 'hp-services__item--right'} lm-svc-item`}
+              >
+                <div className="hp-services__num">{service.num}</div>
+                <div className="hp-services__name">{service.name}</div>
+                <p className="hp-services__desc">{service.desc}</p>
+              </article>
+            );
+          })}
+        </div>
+      </Fade>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   4. PROJECT SHOWCASE
+   ─────────────────────────────────────────────────────────────────── */
+type ShowcaseProps = {
+  page: number;
+  fading: boolean;
+  onPageChange: (newPage: number) => void;
 };
 
-const uInput: React.CSSProperties = {
-  width: '100%',
-  border: 'none',
-  borderBottom: '1px solid rgba(0,0,0,0.15)',
-  padding: '0 0 12px',
-  fontSize: 14,
-  outline: 'none',
-  background: 'transparent',
-  fontFamily: "'Proxima Nova', 'Nunito Sans', sans-serif",
-  color: 'hsl(35 10% 14%)',
-  boxSizing: 'border-box' as const,
-  display: 'block',
-};
+function ShowcaseSection({ page, fading, onPageChange }: ShowcaseProps) {
+  const photos = SHOWCASE_PAGES[page];
+  const [topLeft, topRight, ...bottom] = photos;
 
-function UField({ label, type, placeholder, value, onChange, required }: {
-  label: string; type: string; placeholder: string;
-  value: string; onChange: (v: string) => void; required?: boolean;
+  return (
+    <section id="portfolio" className="hp-showcase lm-pad-h">
+      <Fade className="hp-showcase__header">
+        <div className="hp-eyebrow">our work</div>
+        <h2 className="hp-section-title">Project Showcase</h2>
+      </Fade>
+
+      <Fade direction="in">
+        <div className={`hp-showcase__viewport${fading ? ' hp-showcase__viewport--fading' : ''}`}>
+          <div className="hp-showcase__top-grid">
+            <ShowcaseCell src={topLeft} alt={`Showcase ${page * 5 + 1}`} />
+            <ShowcaseCell src={topRight} alt={`Showcase ${page * 5 + 2}`} offCenter />
+          </div>
+          <div className="hp-showcase__bottom-grid">
+            {bottom.map((src, i) => (
+              <ShowcaseCell
+                key={`${page}-${i}`}
+                src={src}
+                alt={`Showcase ${page * 5 + i + 3}`}
+                bottom
+              />
+            ))}
+          </div>
+        </div>
+      </Fade>
+
+      <ShowcaseNav
+        page={page}
+        total={SHOWCASE_PAGES.length}
+        onChange={onPageChange}
+      />
+    </section>
+  );
+}
+
+function ShowcaseCell({
+  src,
+  alt,
+  bottom,
+  offCenter,
+}: {
+  src: string;
+  alt: string;
+  bottom?: boolean;
+  offCenter?: boolean;
+}) {
+  const cellClass = `hp-showcase__cell${bottom ? ' hp-showcase__cell--bottom' : ''}`;
+  const imgClass = [
+    'hp-showcase__img',
+    bottom && 'hp-showcase__img--bottom',
+    offCenter && 'hp-showcase__img--off-center',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <div className={cellClass}>
+      <img className={imgClass} src={src} alt={alt} />
+    </div>
+  );
+}
+
+function ShowcaseNav({
+  page,
+  total,
+  onChange,
+}: {
+  page: number;
+  total: number;
+  onChange: (newPage: number) => void;
 }) {
   return (
-    <div style={{ marginBottom: 32 }}>
-      <label style={uLabel}>{label}</label>
+    <nav className="hp-showcase__nav" aria-label="Showcase pagination">
+      <button
+        type="button"
+        className="hp-showcase__arrow"
+        aria-label="Previous"
+        onClick={() => onChange(page - 1)}
+      >
+        ‹
+      </button>
+      <div className="hp-showcase__dots">
+        {Array.from({ length: total }, (_, i) => (
+          <button
+            key={i}
+            type="button"
+            className={`hp-showcase__dot${i === page ? ' hp-showcase__dot--active' : ''}`}
+            aria-label={`Go to page ${i + 1}`}
+            aria-current={i === page ? 'page' : undefined}
+            onClick={() => onChange(i)}
+          />
+        ))}
+      </div>
+      <button
+        type="button"
+        className="hp-showcase__arrow"
+        aria-label="Next"
+        onClick={() => onChange(page + 1)}
+      >
+        ›
+      </button>
+    </nav>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   5. TESTIMONIALS
+   ─────────────────────────────────────────────────────────────────── */
+function TestimonialsSection({ onSeeMore }: { onSeeMore: () => void }) {
+  return (
+    <section id="testimonial" className="hp-testimonials lm-pad-h">
+      <Fade className="hp-testimonials__header">
+        <div>
+          <div className="hp-eyebrow">what they say</div>
+          <h2 className="hp-section-title">Testimonial</h2>
+        </div>
+        <button type="button" className="hp-testimonials__see-more" onClick={onSeeMore}>
+          See More ↓
+        </button>
+      </Fade>
+
+      <div className="lm-grid-3">
+        {TESTIMONIALS.map((t, i) => (
+          <Fade key={t.names} delay={i * 0.1}>
+            <div className="hp-testimonial-card__img-frame">
+              <img className="hp-testimonial-card__img" src={t.img} alt={t.names} />
+            </div>
+            <div className="hp-testimonial-card__body">
+              <div className="hp-testimonial-card__name">{t.names}</div>
+              <p className="hp-testimonial-card__quote">"{t.quote}"</p>
+            </div>
+          </Fade>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   6. CONTACT
+   ─────────────────────────────────────────────────────────────────── */
+type FormState = {
+  groom: string;
+  bride: string;
+  phone: string;
+  email: string;
+  date: string;
+  city: string;
+  message: string;
+};
+
+type ContactProps = {
+  sectionRef: React.RefObject<HTMLElement | null>;
+  form: FormState;
+  setForm: React.Dispatch<React.SetStateAction<FormState>>;
+  sent: boolean;
+  onSubmit: () => void;
+};
+
+function ContactSection({ sectionRef, form, setForm, sent, onSubmit }: ContactProps) {
+  function update<K extends keyof FormState>(key: K, value: FormState[K]) {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    onSubmit();
+  }
+
+  return (
+    <section id="contact" ref={sectionRef} className="hp-contact">
+      <Fade delay={0.1} className="hp-contact__inner lm-grid-form lm-pad-h">
+        <div>
+          <div className="hp-contact__eyebrow">let's connect</div>
+          <h2 className="hp-contact__heading">
+            Love Journey<br />Begins Here...
+          </h2>
+          <p className="hp-contact__intro">
+            Every extraordinary event begins with a conversation. We invite you
+            to share your vision with us, and allow our dedicated team to
+            transform it into an unforgettable experience.
+          </p>
+          <div className="hp-contact__details">
+            <div className="hp-contact__detail-line">ThePrestigeOrganizer@gmail.com</div>
+            <div className="hp-contact__detail-line">+62 811 3566 299</div>
+            <div className="hp-contact__detail-line hp-contact__detail-line--multi">
+              Jakarta | Surabaya | Bali<br />Serving Worldwide
+            </div>
+          </div>
+        </div>
+
+        <div>
+          {sent ? (
+            <SentSuccess />
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="hp-form__row">
+                <FormField label="Groom To Be" type="text" placeholder="Alexandra"
+                  value={form.groom} onChange={(v) => update('groom', v)} required />
+                <FormField label="Bride To Be" type="text" placeholder="Wijaya"
+                  value={form.bride} onChange={(v) => update('bride', v)} required />
+                <FormField label="Contact" type="tel" placeholder="+62 ·······"
+                  value={form.phone} onChange={(v) => update('phone', v)} required />
+                <FormField label="Email" type="email" placeholder="your@email.com"
+                  value={form.email} onChange={(v) => update('email', v)} required />
+                <FormField label="Event Date" type="text" placeholder="dd/mm/yyyy"
+                  value={form.date} onChange={(v) => update('date', v)} />
+                <FormField label="City & Country" type="text" placeholder="Surabaya"
+                  value={form.city} onChange={(v) => update('city', v)} />
+              </div>
+
+              <div className="hp-form__field hp-form__field--full">
+                <label className="hp-form__label">Your Vision</label>
+                <textarea
+                  className="hp-form__textarea"
+                  rows={4}
+                  placeholder="Tell us about your dream event...."
+                  value={form.message}
+                  onChange={(e) => update('message', e.target.value)}
+                />
+              </div>
+
+              <button type="submit" className="hp-form__submit">Send Inquiry</button>
+            </form>
+          )}
+        </div>
+      </Fade>
+    </section>
+  );
+}
+
+function SentSuccess() {
+  return (
+    <div className="hp-contact__sent">
+      <div className="hp-contact__sent-icon">✦</div>
+      <div className="hp-contact__sent-title">Thank You</div>
+      <p className="hp-contact__sent-msg">
+        We've received your inquiry and will respond within 24 hours.
+      </p>
+    </div>
+  );
+}
+
+function FormField({
+  label,
+  type,
+  placeholder,
+  value,
+  onChange,
+  required,
+}: {
+  label: string;
+  type: string;
+  placeholder: string;
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+}) {
+  return (
+    <div className="hp-form__field">
+      <label className="hp-form__label">{label}</label>
       <input
-        type={type} placeholder={placeholder} value={value} required={required}
-        onChange={e => onChange(e.target.value)}
-        style={uInput}
+        className="hp-form__input"
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        required={required}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );
